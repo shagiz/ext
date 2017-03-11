@@ -9,7 +9,7 @@ Ext.define("MVC.view.Register", {
 
     controller: 'register',
     bodyPadding: 10,
-    title: 'Registration',
+    title: 'Регистрация',
     closable: false,
 
     items: {
@@ -38,14 +38,14 @@ Ext.define("MVC.view.Register", {
         }
         ],
         buttons: [{
-            text: 'Submit',
+            text: 'Готово',
             formBind: true,
             listeners: {
                 click: 'onRegistrationComplete'
             }
         },
             {
-                text: 'Cancel',
+                text: 'Отмена',
                 listeners: {
                     click: 'onCancelClick'
                 }

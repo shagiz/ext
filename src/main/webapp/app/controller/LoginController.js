@@ -57,13 +57,13 @@ Ext.define('MVC.controller.LoginController', {
         //Received response from the server
         response = Ext.decode(response.responseText);
         if (response.success) {
-            Ext.MessageBox.alert('Successful Login', response.message);
+            // Ext.MessageBox.alert('Successful Login', response.message);
 
             localStorage.isLogged = true;
 
             // Загружаем данные из бд в хранилище
-            var store = Ext.create('MVC.store.TestStore');
-            store.load();
+            // var store = Ext.create('MVC.store.TestStore');
+            // store.load();
 
             this.getView().destroy();
 

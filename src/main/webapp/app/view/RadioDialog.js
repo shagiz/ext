@@ -1,13 +1,16 @@
 Ext.define('MVC.view.RadioDialog', {
     show: function () {
 
+        var radioValue = 0;
+
         var insertButton = Ext.create('Ext.button.Button', {
             text: 'Ввод данных',
             width: 150,
             height: 35,
             margin: '10 10 10 10',
             handler: function () {
-                alert('You clicked the button!')
+                radioWindow.destroy();
+                Ext.create('MVC.view.Main').show();
             }
         });
 
@@ -17,7 +20,13 @@ Ext.define('MVC.view.RadioDialog', {
             height: 35,
             margin: '10 10 10 10',
             handler: function () {
-                alert('You clicked the button!')
+                radioWindow.destroy();
+
+                if (radioValue == 0) {
+
+                } else {
+                    Ext.create('MVC.view.Main').showBibliography();
+                }
             }
         });
 
@@ -27,7 +36,11 @@ Ext.define('MVC.view.RadioDialog', {
             height: 35,
             margin: '10 10 10 10',
             handler: function () {
-                alert('You clicked the button!')
+                localStorage.isLogged = false;
+                radioWindow.destroy();
+                Ext.create('MVC.view.Login', {
+                    renderTo: document.body
+                });
             }
         });
 
@@ -38,9 +51,14 @@ Ext.define('MVC.view.RadioDialog', {
             layout: 'vbox',
             vertical: true,
             items: [
-                {boxLabel: 'Соединения', inputValue: '1'},
-                {boxLabel: 'Литературные ссылки', inputValue: '2', checked: true}
-            ]
+                {boxLabel: 'Соединения', name: 'rb', inputValue: '0', checked: true},
+                {boxLabel: 'Литературные ссылки', name: 'rb', inputValue: '1'}
+            ],
+            listeners: {
+                change: function (obj, value) {
+                    radioValue = value.rb;
+                }
+            }
         });
 
 

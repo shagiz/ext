@@ -9,7 +9,7 @@ Ext.define('MVC.view.Login', {
 
     controller: 'login',
     bodyPadding: 10,
-    title: 'Login',
+    title: 'Авторизация',
     closable: false,
     autoShow: true,
 
@@ -29,12 +29,12 @@ Ext.define('MVC.view.Login', {
             allowBlank: false
         }],
         buttons: [{
-            text: 'Login',
+            text: 'Вход',
             formBind: true,
             action: 'login'
         },
             {
-                text: 'Register',
+                text: 'Регистрация',
                 listeners: {
                     click: 'onRegisterClick'
                 }

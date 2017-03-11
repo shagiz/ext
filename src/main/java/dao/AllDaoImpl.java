@@ -16,6 +16,8 @@ public class AllDaoImpl implements AllDao {
     SistDao sistDao;
     @Inject
     HeatDao heatDao;
+    @Inject
+    BiblioDao biblioDao;
 
     @Override
     public AcopDao getAcopDao() {
@@ -35,5 +37,10 @@ public class AllDaoImpl implements AllDao {
     @Override
     public HeatDao getHeatDao() {
         return heatDao;
+    }
+
+    @Override
+    public BiblioDao getBiblioDao() {
+        return biblioDao;
     }
 }

@@ -19,15 +19,15 @@ Ext.define('MVC.Application', {
     launch: function () {
 
 
-        Ext.create('MVC.view.RadioDialog').show();
+        // Ext.create('MVC.view.RadioDialog').show();
 
-        if (!localStorage.isLogged) {
+        // if (!localStorage.isLogged) {
             Ext.create('MVC.view.Login', {
                 renderTo: document.body
             });
-        }else {
-            Ext.create('MVC.view.RadioDialog').show();
+        // }else {
+        //     Ext.create('MVC.view.RadioDialog').show();
             // Ext.create('MVC.view.Main').show();
-        }
+        // }
     }
 });

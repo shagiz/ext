@@ -51,6 +51,7 @@ Ext.define('MVC.view.Main', {
             region: 'center',
             store: store,
             columns: col,
+            autoScroll: true,
             bbar: toolbar,
             plugins: [rowEditing],
             tbar: [
@@ -202,6 +203,194 @@ Ext.define('MVC.view.Main', {
         });
 
         viewport.show();
+    },
+    showBibliography: function () {
+        var store = {};
+        var col = [
+            {
+                dataIndex: "bknumber",
+                width:100,
+                text: "Bknumber"
+            },
+            {
+                dataIndex: "authors",
+                width:600,
+                text: "Authors",
+                editor: {
+                    allowBlank: true
+                }
+            },
+            {
+                dataIndex: "source",
+                width:600,
+                text: "Source",
+                editor: {
+                    allowBlank: true
+                }
+            },
+            {
+                dataIndex: "title",
+                width:1200,
+                text: "Title",
+                editor: {
+                    allowBlank: true
+                }
+            }
+        ];
+        var entity = 'Biblio';
+
+        var fields = [
+            {dataIndex: "bknumber"},
+            {dataIndex: "authors"},
+            {dataIndex: "source"},
+            {dataIndex: "title"}
+        ];
+
+        store = Ext.create('Ext.data.Store', {
+            fields: fields,
+            autoLoad: true,
+            pageSize: 30,
+            proxy: {
+                type: 'ajax',
+                method: 'get',
+                url: 'rest/table?entity=' + entity,
+                api: {
+                    create: 'rest/table/' + entity,
+                    update: 'rest/table/' + entity,
+                    destroy: 'rest/table?entity=' + entity
+                },
+                actionMethods: {
+                    create: 'POST',
+                    read: 'GET',
+                    update: 'POST',
+                    destroy: 'GET'
+                },
+                reader: {
+                    type: 'json',
+                    root: 'data',
+                    totalProperty: 'total'
+                },
+                paramsAsJson: true
+            }
+        });
+
+
+        var rowEditing = Ext.create('Ext.grid.plugin.RowEditing', {
+            clicksToMoveEditor: 1,
+            autoCancel: false
+        });
+
+        var toolbar = Ext.widget('pagingtoolbar', {
+            store: store,
+            displayInfo: true,
+            displayMsg: 'Данных {0} - {1} of {2}'
+        });
+
+        var contentPanel = Ext.create('Ext.grid.Panel', {
+            title: 'Таблица',
+            region: 'center',
+            store: store,
+            columns: col,
+            autoScroll: true,
+            bbar: toolbar,
+            plugins: [rowEditing],
+            tbar: [
+                {
+                    text: 'Добавить новую запись',
+                    handler: function () {
+                        rowEditing.cancelEdit();
+
+                        var prev = store.data.items[0].data;
+                        var newRow = {};
+                        for (var property  in prev) {
+                            if (prev.hasOwnProperty(property)) {
+                                newRow[prev[property]] = null;
+                            }
+                        }
+
+                        store.insert(0, newRow);
+                        rowEditing.startEdit(0, 0);
+                    }
+                },
+                {
+                    text: 'Обновить данные',
+                    handler: function () {
+                        store.reload();
+                    }
+                },
+                {
+                    text: 'Сохранить изменения',
+                    handler: function () {
+                        // store.sync();
+                    }
+                },
+                {
+                    text: 'Удалить запись',
+                    handler: function () {
+                        var sm = contentPanel.getSelectionModel();
+                        rowEditing.cancelEdit();
+                        store.remove(sm.getSelection());
+                        if (store.getCount() > 0) {
+                            sm.select(0);
+                        }
+                    }
+                },
+                '->',
+                {
+                    text: 'Выход',
+                    handler: function () {
+                        viewport.destroy();
+                        Ext.create('MVC.view.Login', {
+                            renderTo: document.body
+                        });
+                    }
+                }
+            ]
+        });
+
+        var treePanel = Ext.create('Ext.tree.Panel', {
+            id: 'tree-panel',
+            title: 'Категории базы данных',
+            region: 'north',
+            height: '100%',
+            minSize: 150,
+            rootVisible: false,
+            autoScroll: true,
+            root: {
+                expanded: true,
+                children: [
+                    {text: "Литературные ссылки", leaf: true, entity: 'Bibliogr'}
+                ]
+            }
+        });
+
+        var viewport = Ext.create('Ext.Viewport', {
+            layout: 'border',
+            title: ' Панель работы с БД',
+            style: 'background: #efefe8',
+            items: [{
+                xtype: 'box',
+                id: 'header',
+                region: 'north',
+                html: '<h1> Панель работы с БД</h1>',
+                height: 50
+            }, {
+                layout: 'border',
+                id: 'layout-browser',
+                region: 'west',
+                border: false,
+                split: true,
+                margins: '2 0 5 5',
+                width: 290,
+                minSize: 100,
+                maxSize: 500,
+                items: [treePanel]
+            },
+                contentPanel
+            ],
+            renderTo: Ext.getBody()
+        });
+
+        viewport.show();
     }
-})
-;
+});

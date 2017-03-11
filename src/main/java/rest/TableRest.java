@@ -107,6 +107,8 @@ public class TableRest {
                 return allDao.getSistDao();
             case "Heat":
                 return allDao.getHeatDao();
+            case "Biblio":
+                return allDao.getBiblioDao();
         }
         return null;
     }

@@ -11,4 +11,6 @@ public interface AllDao {
     SistDao getSistDao();
 
     HeatDao getHeatDao();
+
+    BiblioDao getBiblioDao();
 }
