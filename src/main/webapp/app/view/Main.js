@@ -204,17 +204,66 @@ Ext.define('MVC.view.Main', {
 
         viewport.show();
     },
-    showBibliography: function () {
+    showBibliography: function (type) {
+
+        if (type == 'edit') {
+
+            var field = Ext.create('Ext.form.field.Number', {
+
+                labelWidth: 180,
+                margin: '10 10 10 10',
+                fieldLabel: 'Номер литературной ссылки'
+            });
+            var number = Ext.create('Ext.window.Window', {
+
+                title: 'BkNumber',
+                width: 400,
+                height: 120,
+                closable: false,
+                autoShow: true,
+                modal: true,
+                items: [
+                    field,
+                    {
+                        xtype: 'button',
+                        text: 'Принять',
+                        margin: '0 0 10 10',
+                        handler: function () {
+                            number.destroy();
+                            viewport.destroy();
+                            Ext.create('MVC.view.Login', {
+                                renderTo: document.body
+                            });
+                        }
+                    },
+                    {
+                        xtype: 'button',
+                        text: 'Назад',
+                        margin: '0 10 10 10',
+                        handler: function () {
+                            number.destroy();
+                            viewport.destroy();
+                            Ext.create('MVC.view.Login', {
+                                renderTo: document.body
+                            });
+                        }
+                    }
+                ]
+            });
+
+            number.show();
+        }
+
         var store = {};
         var col = [
             {
                 dataIndex: "bknumber",
-                width:100,
+                width: 100,
                 text: "Bknumber"
             },
             {
                 dataIndex: "authors",
-                width:600,
+                width: 600,
                 text: "Authors",
                 editor: {
                     allowBlank: true
@@ -222,7 +271,7 @@ Ext.define('MVC.view.Main', {
             },
             {
                 dataIndex: "source",
-                width:600,
+                width: 600,
                 text: "Source",
                 editor: {
                     allowBlank: true
@@ -230,7 +279,7 @@ Ext.define('MVC.view.Main', {
             },
             {
                 dataIndex: "title",
-                width:1200,
+                width: 1200,
                 text: "Title",
                 editor: {
                     allowBlank: true

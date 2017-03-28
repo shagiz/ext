@@ -25,7 +25,7 @@ Ext.define('MVC.view.RadioDialog', {
                 if (radioValue == 0) {
 
                 } else {
-                    Ext.create('MVC.view.Main').showBibliography();
+                    Ext.create('MVC.view.Main').showBibliography('edit');
                 }
             }
         });
