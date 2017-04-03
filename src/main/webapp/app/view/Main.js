@@ -157,7 +157,9 @@ Ext.define('MVC.view.Main', {
 
                         var fields = [];
                         col.forEach(function (item) {
-                            item.editor = {allowBlank: true};
+                            item.editor = {
+                                allowBlank: true
+                            };
                             fields.push(item.dataIndex);
                         });
 
@@ -204,62 +206,18 @@ Ext.define('MVC.view.Main', {
 
         viewport.show();
     },
-    showBibliography: function (type) {
-
-        if (type == 'edit') {
-
-            var field = Ext.create('Ext.form.field.Number', {
-
-                labelWidth: 180,
-                margin: '10 10 10 10',
-                fieldLabel: 'Номер литературной ссылки'
-            });
-            var number = Ext.create('Ext.window.Window', {
-
-                title: 'BkNumber',
-                width: 400,
-                height: 120,
-                closable: false,
-                autoShow: true,
-                modal: true,
-                items: [
-                    field,
-                    {
-                        xtype: 'button',
-                        text: 'Принять',
-                        margin: '0 0 10 10',
-                        handler: function () {
-                            number.destroy();
-                            viewport.destroy();
-                            Ext.create('MVC.view.Login', {
-                                renderTo: document.body
-                            });
-                        }
-                    },
-                    {
-                        xtype: 'button',
-                        text: 'Назад',
-                        margin: '0 10 10 10',
-                        handler: function () {
-                            number.destroy();
-                            viewport.destroy();
-                            Ext.create('MVC.view.Login', {
-                                renderTo: document.body
-                            });
-                        }
-                    }
-                ]
-            });
-
-            number.show();
-        }
+    showBibliography: function () {
 
         var store = {};
         var col = [
             {
                 dataIndex: "bknumber",
                 width: 100,
-                text: "Bknumber"
+                text: "Bknumber",
+                editor: {
+                    allowBlank: false,
+                    readOnly :true
+                }
             },
             {
                 dataIndex: "authors",
@@ -288,16 +246,12 @@ Ext.define('MVC.view.Main', {
         ];
         var entity = 'Biblio';
 
-        var fields = [
-            {dataIndex: "bknumber"},
-            {dataIndex: "authors"},
-            {dataIndex: "source"},
-            {dataIndex: "title"}
-        ];
+        var fields = ["bknumber", "authors", "source", "title"];
 
         store = Ext.create('Ext.data.Store', {
             fields: fields,
             autoLoad: true,
+            remoteSort: true,
             pageSize: 30,
             proxy: {
                 type: 'ajax',
@@ -327,6 +281,10 @@ Ext.define('MVC.view.Main', {
         var rowEditing = Ext.create('Ext.grid.plugin.RowEditing', {
             clicksToMoveEditor: 1,
             autoCancel: false
+        });
+
+        var search = new Ext.create('Ext.form.field.Text', {
+            fieldLabel: 'Номер ссылки'
         });
 
         var toolbar = Ext.widget('pagingtoolbar', {
@@ -370,7 +328,7 @@ Ext.define('MVC.view.Main', {
                 {
                     text: 'Сохранить изменения',
                     handler: function () {
-                        // store.sync();
+                        store.sync();
                     }
                 },
                 {
@@ -382,6 +340,18 @@ Ext.define('MVC.view.Main', {
                         if (store.getCount() > 0) {
                             sm.select(0);
                         }
+                    }
+                },
+                search,
+                {
+                    text: 'Поиск',
+                    handler: function () {
+                        var bkNumber = search.getValue();
+                        store.load({
+                            params: {
+                                bkNumber: bkNumber
+                            }
+                        });
                     }
                 },
                 '->',

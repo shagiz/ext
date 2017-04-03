@@ -10,7 +10,12 @@ Ext.define('MVC.view.RadioDialog', {
             margin: '10 10 10 10',
             handler: function () {
                 radioWindow.destroy();
-                Ext.create('MVC.view.Main').show();
+
+                if (radioValue == 0) {
+                    Ext.create('MVC.view.Main').show();
+                } else {
+                    Ext.create('MVC.view.Main').showBibliography();
+                }
             }
         });
 
@@ -23,7 +28,7 @@ Ext.define('MVC.view.RadioDialog', {
                 radioWindow.destroy();
 
                 if (radioValue == 0) {
-
+                    Ext.create('MVC.view.Main').show();
                 } else {
                     Ext.create('MVC.view.Main').showBibliography('edit');
                 }

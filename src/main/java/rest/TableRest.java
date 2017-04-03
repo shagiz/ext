@@ -2,9 +2,9 @@ package rest;
 
 import com.google.gson.*;
 import dao.interfaces.AllDao;
+import dao.interfaces.BiblioDao;
 import dao.interfaces.GenericDao;
 import dto.Column;
-import dto.EntityTotal;
 import entity.*;
 
 import javax.inject.Inject;
@@ -33,14 +33,21 @@ public class TableRest {
     public Response getData(@QueryParam("entity") String entity,
                             @QueryParam("page") int page,
                             @QueryParam("start") int start,
-                            @QueryParam("limit") int limit) {
+                            @QueryParam("limit") int limit,
+                            @QueryParam("bkNumber") Integer bkNumber) {
         GenericDao genericDao = getDao(entity);
         if (genericDao != null) {
             JsonObject object = new JsonObject();
             Gson gson = new Gson();
 
             JsonParser parser = new JsonParser();
-            JsonElement tradeElement = parser.parse(gson.toJson(genericDao.findAll(page, start, limit)));
+            JsonElement tradeElement;
+
+            if (genericDao instanceof BiblioDao && bkNumber != null && bkNumber > 0) {
+                tradeElement = parser.parse(gson.toJson(((BiblioDao) genericDao).findAllByBk(page, start, limit, bkNumber)));
+            } else {
+                tradeElement = parser.parse(gson.toJson(genericDao.findAll(page, start, limit)));
+            }
 
             object.addProperty("total", genericDao.findAll().size());
             object.add("data", tradeElement.getAsJsonArray());
@@ -90,6 +97,18 @@ public class TableRest {
     @Consumes("application/json")
     public Response putDensity(Heat heat) {
         GenericDao<Heat> genericDao = allDao.getHeatDao();
+
+        if (genericDao != null) {
+            return Response.ok(genericDao.update(heat)).build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/Biblio")
+    @Consumes("application/json")
+    public Response putBiblio(Biblio heat) {
+        GenericDao<Biblio> genericDao = allDao.getBiblioDao();
 
         if (genericDao != null) {
             return Response.ok(genericDao.update(heat)).build();
