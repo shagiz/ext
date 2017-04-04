@@ -1,5 +1,160 @@
 Ext.define('MVC.view.Main', {
     show: function () {
+
+        var element;
+
+        var elementsStore = Ext.create('Ext.data.Store', {
+            fields: ['HeadClue', 'System', 'Expert', 'help', 'Referat', 'eClass'],
+            autoLoad: true,
+            pageSize: 21,
+            proxy: {
+                type: 'ajax',
+                method: 'get',
+                url: 'rest/table/elements',
+                api: {
+                    create: 'rest/table/elements',
+                    update: 'rest/table/elements',
+                    destroy: 'rest/table/elements/delete'
+                },
+                actionMethods: {
+                    create: 'POST',
+                    read: 'GET',
+                    update: 'POST',
+                    destroy: 'GET'
+                },
+                reader: {
+                    type: 'json',
+                    root: 'data',
+                    totalProperty: 'total'
+                },
+                paramsAsJson: true
+            }
+        });
+
+        var elementsToolBar = Ext.widget('pagingtoolbar', {
+            store: elementsStore,
+            displayInfo: true,
+            displayMsg: 'Данных {0} - {1} of {2}'
+        });
+
+        var elementsColumns = [
+            {
+                dataIndex: "headClue",
+                width: 70,
+                text: "HeadClue",
+                editor: {
+                    allowBlank: false,
+                    readOnly: true
+                }
+            },
+            {
+                dataIndex: "system",
+                width: 200,
+                text: "Формула соединения",
+                editor: {
+                    allowBlank: true
+                }
+            },
+            {
+                dataIndex: "help",
+                width: 180,
+                text: "Обозначение соединения",
+                editor: {
+                    allowBlank: true
+                }
+            },
+            {
+                dataIndex: "expert",
+                width: 200,
+                text: "Эксперты",
+                editor: {
+                    allowBlank: true
+                }
+            },
+            {
+                dataIndex: "Referat",
+                width: 400,
+                text: "Аналитический обзор",
+                editor: {
+                    allowBlank: true
+                }
+            },
+            {
+                dataIndex: "eClass",
+                width: 70,
+                text: "Класс",
+                editor: {
+                    allowBlank: true
+                }
+            }
+        ];
+
+        var gridElements = Ext.create('Ext.grid.Panel', {
+            columns: elementsColumns,
+            store: elementsStore,
+            bbar: elementsToolBar,
+            autoScroll: true,
+            tbar: [
+                {
+                    text: 'Добавить новую запись',
+                    handler: function () {
+                        rowEditing.cancelEdit();
+
+                        var prev = store.data.items[0].data;
+                        var newRow = {};
+                        for (var property  in prev) {
+                            if (prev.hasOwnProperty(property)) {
+                                newRow[prev[property]] = null;
+                            }
+                        }
+
+                        store.insert(0, newRow);
+                        rowEditing.startEdit(0, 0);
+                    }
+                },
+                {
+                    text: 'Обновить данные',
+                    handler: function () {
+                        store.reload();
+                    }
+                },
+                {
+                    text: 'Сохранить изменения',
+                    handler: function () {
+                        // store.sync();
+                    }
+                },
+                {
+                    text: 'Удалить запись',
+                    handler: function () {
+                        var sm = contentPanel.getSelectionModel();
+                        rowEditing.cancelEdit();
+                        store.remove(sm.getSelection());
+                        if (store.getCount() > 0) {
+                            sm.select(0);
+                        }
+                    }
+                }
+            ]
+        });
+
+        var elementWin = Ext.create('Ext.window.Window', {
+
+            title: 'Соединения',
+            width: 1150,
+            height: 670,
+            closable: false,
+            autoShow: true,
+            modal: true,
+            layout:'fit',
+            items: [
+                gridElements
+            ]
+        });
+
+        elementWin.show();
+
+
         var store = {};
         var col = [];
         var entity;
@@ -216,7 +371,7 @@ Ext.define('MVC.view.Main', {
                 text: "Bknumber",
                 editor: {
                     allowBlank: false,
-                    readOnly :true
+                    readOnly: true
                 }
             },
             {

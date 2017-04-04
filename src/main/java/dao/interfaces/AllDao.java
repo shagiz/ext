@@ -13,4 +13,6 @@ public interface AllDao {
     HeatDao getHeatDao();
 
     BiblioDao getBiblioDao();
+
+    ElementDao getElementDao();
 }

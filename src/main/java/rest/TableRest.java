@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.*;
 import dao.interfaces.AllDao;
 import dao.interfaces.BiblioDao;
+import dao.interfaces.ElementDao;
 import dao.interfaces.GenericDao;
 import dto.Column;
 import entity.*;
@@ -20,7 +21,31 @@ import java.util.List;
 public class TableRest {
 
     @Inject
-    AllDao allDao;
+    private AllDao allDao;
+
+    @GET
+    @Path("/elements")
+    public Response getElements(@QueryParam("page") int page,
+                                @QueryParam("start") int start,
+                                @QueryParam("limit") int limit) {
+        ElementDao elementDao = allDao.getElementDao();
+        if (elementDao != null) {
+
+            JsonObject object = new JsonObject();
+            Gson gson = new Gson();
+
+            JsonParser parser = new JsonParser();
+            JsonElement jsonElement;
+
+            jsonElement = parser.parse(gson.toJson(elementDao.findAll(page, start, limit)));
+
+            object.addProperty("total", elementDao.findAll().size());
+            object.add("data", jsonElement.getAsJsonArray());
+
+            return Response.ok(object.toString()).build();
+        }
+        return Response.noContent().build();
+    }
 
     @GET
     @Path("/columns")
@@ -41,16 +66,16 @@ public class TableRest {
             Gson gson = new Gson();
 
             JsonParser parser = new JsonParser();
-            JsonElement tradeElement;
+            JsonElement jsonElement;
 
             if (genericDao instanceof BiblioDao && bkNumber != null && bkNumber > 0) {
-                tradeElement = parser.parse(gson.toJson(((BiblioDao) genericDao).findAllByBk(page, start, limit, bkNumber)));
+                jsonElement = parser.parse(gson.toJson(((BiblioDao) genericDao).findAllByBk(page, start, limit, bkNumber)));
             } else {
-                tradeElement = parser.parse(gson.toJson(genericDao.findAll(page, start, limit)));
+                jsonElement = parser.parse(gson.toJson(genericDao.findAll(page, start, limit)));
             }
 
             object.addProperty("total", genericDao.findAll().size());
-            object.add("data", tradeElement.getAsJsonArray());
+            object.add("data", jsonElement.getAsJsonArray());
             return Response.ok(object.toString()).build();
         }
         return Response.noContent().build();

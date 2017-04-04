@@ -9,15 +9,17 @@ import javax.inject.Inject;
 @Stateless
 public class AllDaoImpl implements AllDao {
     @Inject
-    AcopDao acopDao;
+    private AcopDao acopDao;
     @Inject
-    DensityDao densityDao;
+    private DensityDao densityDao;
     @Inject
-    SistDao sistDao;
+    private SistDao sistDao;
     @Inject
-    HeatDao heatDao;
+    private HeatDao heatDao;
     @Inject
-    BiblioDao biblioDao;
+    private BiblioDao biblioDao;
+    @Inject
+    private ElementDao elementDao;
 
     @Override
     public AcopDao getAcopDao() {
@@ -42,5 +44,10 @@ public class AllDaoImpl implements AllDao {
     @Override
     public BiblioDao getBiblioDao() {
         return biblioDao;
+    }
+
+    @Override
+    public ElementDao getElementDao() {
+        return elementDao;
     }
 }
