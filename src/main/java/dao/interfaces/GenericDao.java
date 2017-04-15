@@ -13,9 +13,7 @@ public interface GenericDao<E> {
 
     List<E> findAll();
 
-    List<E> findAll(int page, int start, int limit);
-
-    <T extends BaseEntity> List<T> findAll(String table);
+    List<E> findAll(int page, int start, int limit, Integer headClue);
 
     E update(E t);
 }

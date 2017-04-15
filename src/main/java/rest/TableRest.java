@@ -1,11 +1,15 @@
 package rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.*;
+import com.google.gson.annotations.Expose;
 import dao.interfaces.AllDao;
 import dao.interfaces.BiblioDao;
 import dao.interfaces.ElementDao;
 import dao.interfaces.GenericDao;
 import dto.Column;
+import dto.Filter;
+import dto.Sort;
 import entity.*;
 
 import javax.inject.Inject;
@@ -13,6 +17,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,17 +32,31 @@ public class TableRest {
     @Path("/elements")
     public Response getElements(@QueryParam("page") int page,
                                 @QueryParam("start") int start,
-                                @QueryParam("limit") int limit) {
+                                @QueryParam("limit") int limit,
+                                @QueryParam("sort") Sort sorts,
+                                @QueryParam("filter") Filter filter) {
         ElementDao elementDao = allDao.getElementDao();
+        System.out.println(sorts);
         if (elementDao != null) {
-
             JsonObject object = new JsonObject();
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
+                @Override
+                public boolean shouldSkipField(FieldAttributes fieldAttributes) {
+                    return fieldAttributes.getAnnotation(Expose.class) != null;
+                }
+
+                @Override
+                public boolean shouldSkipClass(Class<?> aClass) {
+                    return false;
+                }
+            }).serializeNulls().create();
 
             JsonParser parser = new JsonParser();
             JsonElement jsonElement;
 
-            jsonElement = parser.parse(gson.toJson(elementDao.findAll(page, start, limit)));
+            jsonElement = parser.parse(gson.toJson(elementDao.findAll(page, start, limit, sorts, filter)));
+            ObjectMapper objectMapper = new ObjectMapper();
+
 
             object.addProperty("total", elementDao.findAll().size());
             object.add("data", jsonElement.getAsJsonArray());
@@ -59,7 +78,8 @@ public class TableRest {
                             @QueryParam("page") int page,
                             @QueryParam("start") int start,
                             @QueryParam("limit") int limit,
-                            @QueryParam("bkNumber") Integer bkNumber) {
+                            @QueryParam("bkNumber") Integer bkNumber,
+                            @QueryParam("headClue") Integer headClue) {
         GenericDao genericDao = getDao(entity);
         if (genericDao != null) {
             JsonObject object = new JsonObject();
@@ -71,7 +91,7 @@ public class TableRest {
             if (genericDao instanceof BiblioDao && bkNumber != null && bkNumber > 0) {
                 jsonElement = parser.parse(gson.toJson(((BiblioDao) genericDao).findAllByBk(page, start, limit, bkNumber)));
             } else {
-                jsonElement = parser.parse(gson.toJson(genericDao.findAll(page, start, limit)));
+                jsonElement = parser.parse(gson.toJson(genericDao.findAll(page, start, limit, headClue)));
             }
 
             object.addProperty("total", genericDao.findAll().size());
@@ -163,7 +183,28 @@ public class TableRest {
             Class clazz = Class.forName("entity." + entity);
             Field[] fields = clazz.getDeclaredFields();
             for (Field field : fields) {
-                columns.add(new Column(field.getName(), field.getName(), 1 % field.getName().length()));
+                boolean readOnly = false;
+                boolean allowBlank = true;
+                String fieldType = "textfield";
+
+                if ("headClue".equals(field.getName()) || "bknumber".equals(field.getName())) {
+                    allowBlank = false;
+                }
+
+                if ("headClue".equals(field.getName())) {
+                    readOnly = true;
+                }
+
+                if (field.getType() == Integer.TYPE
+                        || field.getType() == Long.TYPE
+                        || field.getType() == Float.TYPE
+                        || field.getType() == Float.class
+                        || field.getType() == Double.TYPE
+                        || field.getType() == Double.class) {
+                    fieldType = "numberfield";
+                }
+
+                columns.add(new Column(field.getName(), field.getName(), 1 % field.getName().length(), allowBlank, readOnly, fieldType));
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

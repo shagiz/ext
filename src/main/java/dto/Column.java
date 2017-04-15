@@ -4,11 +4,42 @@ public class Column {
     private String text;
     private String dataIndex;
     private int flex;
+    private boolean allowBlank;
+    private boolean readOnly;
+    private String fieldType;
 
-    public Column(String text, String dataIndex, int flex) {
+
+    public Column(String text, String dataIndex, int flex, boolean allowBlank, boolean readOnly, String fieldType) {
         this.text = text;
         this.dataIndex = dataIndex;
         this.flex = flex;
+        this.allowBlank = allowBlank;
+        this.readOnly = readOnly;
+        this.fieldType = fieldType;
+    }
+
+    public boolean isAllowBlank() {
+        return allowBlank;
+    }
+
+    public void setAllowBlank(boolean allowBlank) {
+        this.allowBlank = allowBlank;
+    }
+
+    public boolean isReadOnly() {
+        return readOnly;
+    }
+
+    public void setReadOnly(boolean readOnly) {
+        this.readOnly = readOnly;
+    }
+
+    public String getFieldType() {
+        return fieldType;
+    }
+
+    public void setFieldType(String fieldType) {
+        this.fieldType = fieldType;
     }
 
     public String getText() {

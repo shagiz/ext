@@ -26,6 +26,9 @@ public class Element {
     @Column(name = "Help")
     private String help;
 
+    @OneToOne(mappedBy = "element", fetch = FetchType.LAZY)
+    private Referat referat;
+
     public int getHeadClue() {
         return headClue;
     }
@@ -64,5 +67,13 @@ public class Element {
 
     public void setHelp(String help) {
         this.help = help;
+    }
+
+    public Referat getReferat() {
+        return referat;
+    }
+
+    public void setReferat(Referat referat) {
+        this.referat = referat;
     }
 }

@@ -3,6 +3,7 @@ package entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "DensTabl")
@@ -12,10 +13,10 @@ public class Density extends BaseEntity {
     private int headClue;
 
     @Column(name = "Density")
-    private Double density;
+    private Float density;
 
     @Column(name = "ErrDens")
-    private Double errDens;
+    private Float errDens;
 
     @Column(name = "MethodD")
     private String methodD;
@@ -31,19 +32,19 @@ public class Density extends BaseEntity {
         this.headClue = headClue;
     }
 
-    public Double getDensity() {
+    public Float getDensity() {
         return density;
     }
 
-    public void setDensity(Double density) {
+    public void setDensity(Float density) {
         this.density = density;
     }
 
-    public Double getErrDens() {
+    public Float getErrDens() {
         return errDens;
     }
 
-    public void setErrDens(Double errDens) {
+    public void setErrDens(Float errDens) {
         this.errDens = errDens;
     }
 

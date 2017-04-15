@@ -3,171 +3,225 @@ Ext.define('MVC.view.Main', {
 
         var element;
 
-        var elementsStore = Ext.create('Ext.data.Store', {
-            fields: ['HeadClue', 'System', 'Expert', 'help', 'Referat', 'eClass'],
-            autoLoad: true,
-            pageSize: 21,
-            proxy: {
-                type: 'ajax',
-                method: 'get',
-                url: 'rest/table/elements',
-                api: {
-                    create: 'rest/table/elements',
-                    update: 'rest/table/elements',
-                    destroy: 'rest/table/elements/delete'
+        function extracted() {
+            var elementsStore = Ext.create('Ext.data.Store', {
+                fields: ['HeadClue', 'System', 'Expert', 'help', {name: 'referat', mapping: 'referat.value'}, 'eClass'],
+                autoLoad: true,
+                pageSize: 21,
+                proxy: {
+                    type: 'ajax',
+                    method: 'get',
+                    url: 'rest/table/elements',
+                    api: {
+                        create: 'rest/table/elements',
+                        update: 'rest/table/elements',
+                        destroy: 'rest/table/elements/delete'
+                    },
+                    actionMethods: {
+                        create: 'POST',
+                        read: 'GET',
+                        update: 'POST',
+                        destroy: 'GET'
+                    },
+                    reader: {
+                        type: 'json',
+                        root: 'data',
+                        totalProperty: 'total'
+                    },
+                    paramsAsJson: true
                 },
-                actionMethods: {
-                    create: 'POST',
-                    read: 'GET',
-                    update: 'POST',
-                    destroy: 'GET'
-                },
-                reader: {
-                    type: 'json',
-                    root: 'data',
-                    totalProperty: 'total'
-                },
-                paramsAsJson: true
-            }
-        });
+                remoteFilter: true,
+                remoteSort: true
+            });
 
-        var elementsToolBar = Ext.widget('pagingtoolbar', {
-            store: elementsStore,
-            displayInfo: true,
-            displayMsg: 'Данных {0} - {1} of {2}'
-        });
+            var elementsToolBar = Ext.widget('pagingtoolbar', {
+                store: elementsStore,
+                displayInfo: true,
+                displayMsg: 'Данных {0} - {1} of {2}'
+            });
 
-        var elementsColumns = [
-            {
-                dataIndex: "headClue",
-                width: 70,
-                text: "HeadClue",
-                editor: {
-                    allowBlank: false,
-                    readOnly: true
-                }
-            },
-            {
-                dataIndex: "system",
-                width: 200,
-                text: "Формула соединения",
-                editor: {
-                    allowBlank: true
-                }
-            },
-            {
-                dataIndex: "help",
-                width: 180,
-                text: "Обозначение соединения",
-                editor: {
-                    allowBlank: true
-                }
-            },
-            {
-                dataIndex: "expert",
-                width: 200,
-                text: "Эксперты",
-                editor: {
-                    allowBlank: true
-                }
-            },
-            {
-                dataIndex: "Referat",
-                width: 400,
-                text: "Аналитический обзор",
-                editor: {
-                    allowBlank: true
-                }
-            },
-            {
-                dataIndex: "eClass",
-                width: 70,
-                text: "Класс",
-                editor: {
-                    allowBlank: true
-                }
-            }
-        ];
-
-        var gridElements = Ext.create('Ext.grid.Panel', {
-            columns: elementsColumns,
-            store: elementsStore,
-            bbar: elementsToolBar,
-            autoScroll: true,
-            tbar: [
+            var elementsColumns = [
                 {
-                    text: 'Добавить новую запись',
-                    handler: function () {
-                        rowEditing.cancelEdit();
+                    dataIndex: "headClue",
+                    width: 70,
+                    text: "HeadClue",
+                    editor: {
+                        allowBlank: false,
+                        readOnly: true
+                    }
+                },
+                {
+                    dataIndex: "system",
+                    width: 200,
+                    text: "Формула соединения",
+                    editor: {
+                        allowBlank: true
+                    },
+                    filter: {
+                        type: 'string',
+                        serializer: function (filter) {
+                            return filter.value;
+                        }
+                    }
+                },
+                {
+                    dataIndex: "help",
+                    width: 180,
+                    text: "Обозначение соединения",
+                    editor: {
+                        allowBlank: true
+                    },
+                    filter: {
+                        type: 'string',
+                        serializer: function (filter) {
+                            return filter.value;
+                        }
+                    }
+                },
+                {
+                    dataIndex: "expert",
+                    width: 200,
+                    text: "Эксперты",
+                    editor: {
+                        allowBlank: true
+                    }
+                },
+                {
+                    dataIndex: "eClass",
+                    width: 70,
+                    text: "Класс",
+                    editor: {
+                        allowBlank: true
+                    }
+                },
+                {
+                    //todo : показывать ?
+                    // dataIndex: "referat",
+                    width: '100%',
+                    text: "Аналитический обзор",
+                    editor: {
+                        allowBlank: true
+                    }
+                }
+            ];
 
-                        var prev = store.data.items[0].data;
-                        var newRow = {};
-                        for (var property  in prev) {
-                            if (prev.hasOwnProperty(property)) {
-                                newRow[prev[property]] = null;
+            var gridElements = Ext.create('Ext.grid.Panel', {
+                columns: elementsColumns,
+                store: elementsStore,
+                bbar: elementsToolBar,
+                autoScroll: true,
+                plugins: 'gridfilters',
+                tbar: [
+                    {
+                        text: 'Добавить новую запись',
+                        handler: function () {
+                            rowEditing.cancelEdit();
+
+                            var prev = elementsStore.data.items[0].data;
+                            var newRow = {};
+                            for (var property  in prev) {
+                                if (prev.hasOwnProperty(property)) {
+                                    newRow[prev[property]] = null;
+                                }
+                            }
+
+                            elementsStore.insert(0, newRow);
+                            rowEditing.startEdit(0, 0);
+                        }
+                    },
+                    {
+                        text: 'Обновить данные',
+                        handler: function () {
+                            store.reload();
+                        }
+                    },
+                    {
+                        text: 'Сохранить изменения',
+                        handler: function () {
+                            // store.sync();
+                        }
+                    },
+                    {
+                        text: 'Удалить запись',
+                        handler: function () {
+                            var sm = gridElements.getSelectionModel();
+                            rowEditing.cancelEdit();
+                            store.remove(sm.getSelection());
+                            if (store.getCount() > 0) {
+                                sm.select(0);
                             }
                         }
-
-                        store.insert(0, newRow);
-                        rowEditing.startEdit(0, 0);
-                    }
-                },
-                {
-                    text: 'Обновить данные',
-                    handler: function () {
-                        store.reload();
-                    }
-                },
-                {
-                    text: 'Сохранить изменения',
-                    handler: function () {
-                        // store.sync();
-                    }
-                },
-                {
-                    text: 'Удалить запись',
-                    handler: function () {
-                        var sm = contentPanel.getSelectionModel();
-                        rowEditing.cancelEdit();
-                        store.remove(sm.getSelection());
-                        if (store.getCount() > 0) {
-                            sm.select(0);
+                    },
+                    {
+                        text: 'Выбрать',
+                        handler: function () {
+                            if (gridElements.getSelectionModel().hasSelection()) {
+                                var row = gridElements.getSelectionModel().getSelection()[0];
+                                element = row.get('headClue');
+                                console.log(element);
+                                if (store.data && fields && entity) {
+                                    store = createStore(fields, entity);
+                                    store.load();
+                                }
+                                elementWin.close();
+                            } else {
+                                alert('Выберите элемент');
+                            }
+                        }
+                    },
+                    '->',
+                    {
+                        text: 'Выход',
+                        handler: function () {
+                            elementWin.destroy();
+                            viewport.destroy();
+                            Ext.create('MVC.view.Login', {
+                                renderTo: document.body
+                            });
                         }
                     }
-                }
-            ]
-        });
+                ]
+            });
 
-        var elementWin = Ext.create('Ext.window.Window', {
+            var elementWin = Ext.create('Ext.window.Window', {
 
-            title: 'Соединения',
-            width: 1150,
-            height: 670,
-            closable: false,
-            autoShow: true,
-            modal: true,
-            layout:'fit',
-            items: [
-                gridElements
-            ]
-        });
+                title: 'Соединения',
+                width: Ext.getBody().getViewSize().width * 0.9,
+                height: Ext.getBody().getViewSize().height * 0.9,
+                closable: false,
+                autoShow: true,
+                modal: true,
+                layout: 'fit',
+                items: [
+                    gridElements
+                ]
+            });
 
-        elementWin.show();
+            elementWin.show();
+        }
+
+        extracted();
 
 
         var store = {};
         var col = [];
         var entity;
+        var fields;
 
         function createStore(fields, entity) {
-            return Ext.create('Ext.data.Store', {
+            var url = 'rest/table?entity=' + entity;
+            if (element != null && element != undefined) {
+                url += '&headClue=' + element;
+            }
+
+            var newStore = Ext.create('Ext.data.Store', {
                 fields: fields,
                 autoLoad: false,
                 pageSize: 30,
                 proxy: {
                     type: 'ajax',
                     method: 'get',
-                    url: 'rest/table?entity=' + entity,
+                    url: url,
                     api: {
                         create: 'rest/table/' + entity,
                         update: 'rest/table/' + entity,
@@ -184,9 +238,20 @@ Ext.define('MVC.view.Main', {
                         root: 'data',
                         totalProperty: 'total'
                     },
+                    writer:{
+                        type: 'json',
+                        writeAllFields: true
+                    },
                     paramsAsJson: true
                 }
-            })
+            });
+            newStore.on('load', function (st) {
+                contentPanel.setTitle('Таблица - ' + entity);
+                contentPanel.reconfigure(newStore, col);
+                toolbar.bindStore(newStore);
+            });
+
+            return newStore;
         }
 
 
@@ -211,6 +276,12 @@ Ext.define('MVC.view.Main', {
             plugins: [rowEditing],
             tbar: [
                 {
+                    text: 'Выбрать новый элемент',
+                    handler: function () {
+                        extracted();
+                    }
+                },
+                {
                     text: 'Добавить новую запись',
                     handler: function () {
                         rowEditing.cancelEdit();
@@ -236,7 +307,7 @@ Ext.define('MVC.view.Main', {
                 {
                     text: 'Сохранить изменения',
                     handler: function () {
-                        // store.sync();
+                        store.sync();
                     }
                 },
                 {
@@ -252,9 +323,13 @@ Ext.define('MVC.view.Main', {
                 },
                 '->',
                 {
-                    xtype: 'triggerfield',
-                    trigger1Cls: Ext.baseCSSPrefix + 'form-clear-trigger',
-                    trigger2Cls: Ext.baseCSSPrefix + 'form-search-trigger'
+                    text: 'Выход',
+                    handler: function () {
+                        viewport.destroy();
+                        Ext.create('MVC.view.Login', {
+                            renderTo: document.body
+                        });
+                    }
                 }
             ]
         });
@@ -310,22 +385,19 @@ Ext.define('MVC.view.Main', {
                     success: function (response) {
                         col = JSON.parse(response.responseText);
 
-                        var fields = [];
+                        fields = [];
                         col.forEach(function (item) {
-                            item.editor = {
-                                allowBlank: true
-                            };
+                            if(!item.readOnly) {
+                                item.editor = {
+                                    allowBlank: item.allowBlank,
+                                    // readOnly: item.readOnly,
+                                    xtype: item.fieldType
+                                };
+                            }
                             fields.push(item.dataIndex);
                         });
 
                         store = createStore(fields, entity);
-
-                        store.on('load', function (st) {
-                            contentPanel.setTitle('Таблица - ' + entity);
-                            contentPanel.reconfigure(store, col);
-                            toolbar.bindStore(store);
-                        });
-
                         store.load();
                     }
                 });
@@ -370,7 +442,7 @@ Ext.define('MVC.view.Main', {
                 width: 100,
                 text: "Bknumber",
                 editor: {
-                    allowBlank: false,
+                    allowBlank: true,
                     readOnly: true
                 }
             },

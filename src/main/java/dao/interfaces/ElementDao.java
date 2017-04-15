@@ -1,5 +1,7 @@
 package dao.interfaces;
 
+import dto.Filter;
+import dto.Sort;
 import entity.Element;
 
 import javax.ejb.Local;
@@ -10,4 +12,5 @@ import java.util.List;
  */
 @Local
 public interface ElementDao extends GenericDao<Element> {
+    List<Element> findAll(int page, int start, int limit, Sort sorts, Filter filter);
 }
