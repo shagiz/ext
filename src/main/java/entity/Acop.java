@@ -36,7 +36,7 @@ public class Acop extends BaseEntity {
     private Double m3;
 
     @Column(name = "Bknumber")
-    private Integer bkNumber;
+    private Integer bknumber;
 
     public Integer getHeadClue() {
         return headClue;
@@ -110,11 +110,11 @@ public class Acop extends BaseEntity {
         this.m3 = m3;
     }
 
-    public Integer getBkNumber() {
-        return bkNumber;
+    public Integer getBknumber() {
+        return bknumber;
     }
 
-    public void setBkNumber(Integer bkNumber) {
-        this.bkNumber = bkNumber;
+    public void setBknumber(Integer bkNumber) {
+        this.bknumber = bkNumber;
     }
 }

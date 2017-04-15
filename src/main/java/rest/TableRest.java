@@ -1,6 +1,7 @@
 package rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.gson.*;
 import com.google.gson.annotations.Expose;
 import dao.interfaces.AllDao;
@@ -104,11 +105,12 @@ public class TableRest {
     @POST
     @Path("/Acop")
     @Consumes("application/json")
-    public Response putAcop(Acop acop) {
+    public Response putAcop(List<Acop> data) {
         GenericDao<Acop> genericDao = allDao.getAcopDao();
 
         if (genericDao != null) {
-            return Response.ok(genericDao.update(acop)).build();
+            data.forEach(genericDao::update);
+            return Response.ok().build();
         }
         return Response.serverError().build();
     }
@@ -116,11 +118,12 @@ public class TableRest {
     @POST
     @Path("/Density")
     @Consumes("application/json")
-    public Response putDensity(Density density) {
+    public Response putDensity(List<Density> data) {
         GenericDao<Density> genericDao = allDao.getDensityDao();
 
         if (genericDao != null) {
-            return Response.ok(genericDao.update(density)).build();
+            data.forEach(genericDao::update);
+            return Response.ok().build();
         }
         return Response.serverError().build();
     }
@@ -128,11 +131,12 @@ public class TableRest {
     @POST
     @Path("/Sist")
     @Consumes("application/json")
-    public Response putDensity(Sist sist) {
+    public Response putSist(List<Sist> data) {
         GenericDao<Sist> genericDao = allDao.getSistDao();
 
         if (genericDao != null) {
-            return Response.ok(genericDao.update(sist)).build();
+            data.forEach(genericDao::update);
+            return Response.ok().build();
         }
         return Response.serverError().build();
     }
@@ -140,11 +144,12 @@ public class TableRest {
     @POST
     @Path("/Heat")
     @Consumes("application/json")
-    public Response putDensity(Heat heat) {
+    public Response putHeat(List<Heat> data) {
         GenericDao<Heat> genericDao = allDao.getHeatDao();
 
         if (genericDao != null) {
-            return Response.ok(genericDao.update(heat)).build();
+            data.forEach(genericDao::update);
+            return Response.ok().build();
         }
         return Response.serverError().build();
     }
@@ -152,11 +157,12 @@ public class TableRest {
     @POST
     @Path("/Biblio")
     @Consumes("application/json")
-    public Response putBiblio(Biblio heat) {
+    public Response putBiblio(List<Biblio> data) {
         GenericDao<Biblio> genericDao = allDao.getBiblioDao();
 
         if (genericDao != null) {
-            return Response.ok(genericDao.update(heat)).build();
+            data.forEach(genericDao::update);
+            return Response.ok().build();
         }
         return Response.serverError().build();
     }

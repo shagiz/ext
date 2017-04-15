@@ -222,6 +222,7 @@ Ext.define('MVC.view.Main', {
                     type: 'ajax',
                     method: 'get',
                     url: url,
+                    batchActions: true,
                     api: {
                         create: 'rest/table/' + entity,
                         update: 'rest/table/' + entity,
@@ -238,11 +239,10 @@ Ext.define('MVC.view.Main', {
                         root: 'data',
                         totalProperty: 'total'
                     },
-                    writer:{
-                        type: 'json',
+                    writer: {
+                        allowSingle: false,
                         writeAllFields: true
-                    },
-                    paramsAsJson: true
+                    }
                 }
             });
             newStore.on('load', function (st) {
@@ -290,7 +290,11 @@ Ext.define('MVC.view.Main', {
                         var newRow = {};
                         for (var property  in prev) {
                             if (prev.hasOwnProperty(property)) {
-                                newRow[prev[property]] = null;
+                                if (property === "headClue") {
+                                    newRow[property] = element;
+                                } else {
+                                    newRow[property] = null;
+                                }
                             }
                         }
 
@@ -387,7 +391,7 @@ Ext.define('MVC.view.Main', {
 
                         fields = [];
                         col.forEach(function (item) {
-                            if(!item.readOnly) {
+                            if (!item.readOnly) {
                                 item.editor = {
                                     allowBlank: item.allowBlank,
                                     // readOnly: item.readOnly,
@@ -500,7 +504,10 @@ Ext.define('MVC.view.Main', {
                     root: 'data',
                     totalProperty: 'total'
                 },
-                paramsAsJson: true
+                writer: {
+                    allowSingle: false,
+                    writeAllFields: true
+                }
             }
         });
 
