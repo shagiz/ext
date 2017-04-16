@@ -1,5 +1,6 @@
 package dao.interfaces;
 
+import dto.Sort;
 import entity.Biblio;
 
 import javax.ejb.Local;

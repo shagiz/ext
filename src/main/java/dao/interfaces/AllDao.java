@@ -15,4 +15,6 @@ public interface AllDao {
     BiblioDao getBiblioDao();
 
     ElementDao getElementDao();
+
+    PzElDao getPzElDao();
 }

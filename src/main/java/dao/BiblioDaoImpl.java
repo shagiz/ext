@@ -1,6 +1,7 @@
 package dao;
 
 import dao.interfaces.BiblioDao;
+import dto.Sort;
 import entity.Biblio;
 
 import javax.ejb.Stateless;

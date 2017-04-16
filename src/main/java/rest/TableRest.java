@@ -1,7 +1,5 @@
 package rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.gson.*;
 import com.google.gson.annotations.Expose;
 import dao.interfaces.AllDao;
@@ -18,7 +16,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.lang.reflect.Field;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +34,7 @@ public class TableRest {
                                 @QueryParam("sort") Sort sorts,
                                 @QueryParam("filter") Filter filter) {
         ElementDao elementDao = allDao.getElementDao();
-        System.out.println(sorts);
+
         if (elementDao != null) {
             JsonObject object = new JsonObject();
             Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
@@ -56,7 +53,6 @@ public class TableRest {
             JsonElement jsonElement;
 
             jsonElement = parser.parse(gson.toJson(elementDao.findAll(page, start, limit, sorts, filter)));
-            ObjectMapper objectMapper = new ObjectMapper();
 
 
             object.addProperty("total", elementDao.findAll().size());
@@ -80,7 +76,8 @@ public class TableRest {
                             @QueryParam("start") int start,
                             @QueryParam("limit") int limit,
                             @QueryParam("bkNumber") Integer bkNumber,
-                            @QueryParam("headClue") Integer headClue) {
+                            @QueryParam("headClue") Integer headClue,
+                            @QueryParam("sort") Sort sort) {
         GenericDao genericDao = getDao(entity);
         if (genericDao != null) {
             JsonObject object = new JsonObject();
@@ -92,7 +89,7 @@ public class TableRest {
             if (genericDao instanceof BiblioDao && bkNumber != null && bkNumber > 0) {
                 jsonElement = parser.parse(gson.toJson(((BiblioDao) genericDao).findAllByBk(page, start, limit, bkNumber)));
             } else {
-                jsonElement = parser.parse(gson.toJson(genericDao.findAll(page, start, limit, headClue)));
+                jsonElement = parser.parse(gson.toJson(genericDao.findAll(page, start, limit, sort, headClue)));
             }
 
             object.addProperty("total", genericDao.findAll().size());
@@ -155,6 +152,19 @@ public class TableRest {
     }
 
     @POST
+    @Path("/PzEl")
+    @Consumes("application/json")
+    public Response putPzEl(List<PzEl> data) {
+        GenericDao<PzEl> genericDao = allDao.getPzElDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
     @Path("/Biblio")
     @Consumes("application/json")
     public Response putBiblio(List<Biblio> data) {
@@ -179,6 +189,8 @@ public class TableRest {
                 return allDao.getHeatDao();
             case "Biblio":
                 return allDao.getBiblioDao();
+            case "PzEl":
+                return allDao.getPzElDao();
         }
         return null;
     }
@@ -202,6 +214,7 @@ public class TableRest {
                 }
 
                 if (field.getType() == Integer.TYPE
+                        || field.getType() == Integer.class
                         || field.getType() == Long.TYPE
                         || field.getType() == Float.TYPE
                         || field.getType() == Float.class

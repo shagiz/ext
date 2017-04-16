@@ -1,10 +1,9 @@
 package dao;
 
 import dao.interfaces.GenericDao;
-import entity.BaseEntity;
+import dto.Sort;
 
 import javax.persistence.*;
-import javax.ws.rs.Path;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -55,7 +54,7 @@ public class GenericDaoImpl<E> implements GenericDao<E> {
     }
 
     @Override
-    public List<E> findAll(int page, int start, int limit, Integer headClue) {
+    public List<E> findAll(int page, int start, int limit, Sort sort, Integer headClue) {
         final StringBuffer queryString = new StringBuffer(
                 "SELECT o from ");
 
@@ -68,7 +67,15 @@ public class GenericDaoImpl<E> implements GenericDao<E> {
                     .append(" ");
         }
 
-        queryString.append("order by o.id");
+        if (sort != null) {
+            queryString
+                    .append("order by o.")
+                    .append(sort.getProperty())
+                    .append(" ")
+                    .append(sort.getDirection());
+        } else {
+            queryString.append("order by o.id");
+        }
 
         final Query query = this.em.createQuery(queryString.toString());
 //        query.setParameter(0, headClue);

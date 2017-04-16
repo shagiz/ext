@@ -1,6 +1,6 @@
 package dao.interfaces;
 
-import entity.BaseEntity;
+import dto.Sort;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface GenericDao<E> {
 
     List<E> findAll();
 
-    List<E> findAll(int page, int start, int limit, Integer headClue);
+    List<E> findAll(int page, int start, int limit, Sort sort, Integer headClue);
 
     E update(E t);
 }

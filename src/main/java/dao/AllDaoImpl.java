@@ -20,6 +20,8 @@ public class AllDaoImpl implements AllDao {
     private BiblioDao biblioDao;
     @Inject
     private ElementDao elementDao;
+    @Inject
+    private PzElDao pzElDao;
 
     @Override
     public AcopDao getAcopDao() {
@@ -49,5 +51,10 @@ public class AllDaoImpl implements AllDao {
     @Override
     public ElementDao getElementDao() {
         return elementDao;
+    }
+
+    @Override
+    public PzElDao getPzElDao() {
+        return pzElDao;
     }
 }

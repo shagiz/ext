@@ -3,9 +3,17 @@ Ext.define('MVC.view.Main', {
 
         var element;
 
+        // -------------------------------------------------------------------------------------------------------------
+
         function extracted() {
+
+            var rowEditor = Ext.create('Ext.grid.plugin.RowEditing', {
+                clicksToMoveEditor: 2,
+                autoCancel: false
+            });
+
             var elementsStore = Ext.create('Ext.data.Store', {
-                fields: ['HeadClue', 'System', 'Expert', 'help', {name: 'referat', mapping: 'referat.value'}, 'eClass'],
+                fields: ['headClue', 'system', 'expert', 'help', {name: 'referat', mapping: 'referat.value'}, 'eClass'],
                 autoLoad: true,
                 pageSize: 21,
                 proxy: {
@@ -28,6 +36,10 @@ Ext.define('MVC.view.Main', {
                         root: 'data',
                         totalProperty: 'total'
                     },
+                    writer: {
+                        allowSingle: false,
+                        writeAllFields: true
+                    },
                     paramsAsJson: true
                 },
                 remoteFilter: true,
@@ -44,11 +56,7 @@ Ext.define('MVC.view.Main', {
                 {
                     dataIndex: "headClue",
                     width: 70,
-                    text: "HeadClue",
-                    editor: {
-                        allowBlank: false,
-                        readOnly: true
-                    }
+                    text: "HeadClue"
                 },
                 {
                     dataIndex: "system",
@@ -110,7 +118,7 @@ Ext.define('MVC.view.Main', {
                 store: elementsStore,
                 bbar: elementsToolBar,
                 autoScroll: true,
-                plugins: 'gridfilters',
+                plugins: [rowEditor, 'gridfilters'],
                 tbar: [
                     {
                         text: 'Добавить новую запись',
@@ -121,7 +129,7 @@ Ext.define('MVC.view.Main', {
                             var newRow = {};
                             for (var property  in prev) {
                                 if (prev.hasOwnProperty(property)) {
-                                    newRow[prev[property]] = null;
+                                    newRow[property] = null;
                                 }
                             }
 
@@ -132,13 +140,13 @@ Ext.define('MVC.view.Main', {
                     {
                         text: 'Обновить данные',
                         handler: function () {
-                            store.reload();
+                            elementsStore.reload();
                         }
                     },
                     {
                         text: 'Сохранить изменения',
                         handler: function () {
-                            // store.sync();
+                            // elementsStore.sync();
                         }
                     },
                     {
@@ -146,8 +154,8 @@ Ext.define('MVC.view.Main', {
                         handler: function () {
                             var sm = gridElements.getSelectionModel();
                             rowEditing.cancelEdit();
-                            store.remove(sm.getSelection());
-                            if (store.getCount() > 0) {
+                            elementsStore.remove(sm.getSelection());
+                            if (elementsStore.getCount() > 0) {
                                 sm.select(0);
                             }
                         }
@@ -200,14 +208,23 @@ Ext.define('MVC.view.Main', {
             elementWin.show();
         }
 
+        // -------------------------------------------------------------------------------------------------------------
+
         extracted();
 
+        // -------------------------------------------------------------------------------------------------------------
 
         var store = {};
         var col = [];
         var entity;
         var fields;
 
+        // -------------------------------------------------------------------------------------------------------------
+
+        var rowEditing = Ext.create('Ext.grid.plugin.RowEditing', {
+            clicksToMoveEditor: 2,
+            autoCancel: false
+        });
         function createStore(fields, entity) {
             var url = 'rest/table?entity=' + entity;
             if (element != null && element != undefined) {
@@ -218,6 +235,8 @@ Ext.define('MVC.view.Main', {
                 fields: fields,
                 autoLoad: false,
                 pageSize: 30,
+                remoteSort: true,
+                remoteFilter: true,
                 proxy: {
                     type: 'ajax',
                     method: 'get',
@@ -254,11 +273,7 @@ Ext.define('MVC.view.Main', {
             return newStore;
         }
 
-
-        var rowEditing = Ext.create('Ext.grid.plugin.RowEditing', {
-            clicksToMoveEditor: 1,
-            autoCancel: false
-        });
+        // -------------------------------------------------------------------------------------------------------------
 
         var toolbar = Ext.widget('pagingtoolbar', {
             store: store,
@@ -338,6 +353,8 @@ Ext.define('MVC.view.Main', {
             ]
         });
 
+        // -------------------------------------------------------------------------------------------------------------
+
         var treePanel = Ext.create('Ext.tree.Panel', {
             id: 'tree-panel',
             title: 'Категории базы данных',
@@ -353,7 +370,7 @@ Ext.define('MVC.view.Main', {
                     {text: "Область гомогенности соединения", leaf: true, entity: 'Sist'},
                     {text: "Теплоемкость", leaf: true, entity: 'Heat'},
                     {text: "Плотность", leaf: true, entity: 'Density'},
-                    {text: "Пьезоэлектрические коэффициенты", leaf: true},
+                    {text: "Пьезоэлектрические коэффициенты", leaf: true, entity: 'PzEl'},
                     {text: "Твердость", leaf: true},
                     {text: "Растворимость", leaf: true},
                     {text: "Температура плавления", leaf: true},
@@ -379,6 +396,8 @@ Ext.define('MVC.view.Main', {
             }
         });
 
+        // -------------------------------------------------------------------------------------------------------------
+
         treePanel.getSelectionModel().on('select', function (selModel, record) {
             if (record.get('leaf')) {
                 entity = record.get('entity');
@@ -394,10 +413,10 @@ Ext.define('MVC.view.Main', {
                             if (!item.readOnly) {
                                 item.editor = {
                                     allowBlank: item.allowBlank,
-                                    // readOnly: item.readOnly,
                                     xtype: item.fieldType
                                 };
                             }
+
                             fields.push(item.dataIndex);
                         });
 
@@ -407,6 +426,8 @@ Ext.define('MVC.view.Main', {
                 });
             }
         });
+
+        // -------------------------------------------------------------------------------------------------------------
 
         var viewport = Ext.create('Ext.Viewport', {
             layout: 'border',
@@ -434,6 +455,8 @@ Ext.define('MVC.view.Main', {
             ],
             renderTo: Ext.getBody()
         });
+
+        // -------------------------------------------------------------------------------------------------------------
 
         viewport.show();
     },
@@ -517,7 +540,7 @@ Ext.define('MVC.view.Main', {
             autoCancel: false
         });
 
-        var search = new Ext.create('Ext.form.field.Text', {
+        var search = new Ext.create('Ext.form.field.Number', {
             fieldLabel: 'Номер ссылки'
         });
 
