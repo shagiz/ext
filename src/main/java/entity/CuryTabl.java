@@ -6,11 +6,7 @@ import java.math.BigDecimal;
 //Температура Кюри
 @Entity
 @Table(name = "CuryTabl")
-public class CuryTabl extends BaseEntity {
-
-    @ColumnProperty(name = "Номер соединения")
-    @Column(name = "HeadClue", nullable = false)
-    private int headClue;
+public class CuryTabl extends BaseHeadClueEntity {
 
     @ColumnProperty(name = "Температура, K")
     @Column(name = "CuryTemp")
@@ -23,10 +19,6 @@ public class CuryTabl extends BaseEntity {
     @ColumnProperty(name = "Тип фазового перехода")
     @Column(name = "Oboztran")
     private String oboztran;
-
-    @ColumnProperty(name = "Ссылка")
-    @Column(name = "Bknumber")
-    private Integer bknumber;
 
     public BigDecimal getCuryTemp() {
         return curyTemp;
@@ -72,21 +64,5 @@ public class CuryTabl extends BaseEntity {
         result = 31 * result + (errCury != null ? errCury.hashCode() : 0);
         result = 31 * result + (oboztran != null ? oboztran.hashCode() : 0);
         return result;
-    }
-
-    public int getHeadClue() {
-        return headClue;
-    }
-
-    public void setHeadClue(int headClue) {
-        this.headClue = headClue;
-    }
-
-    public Integer getBknumber() {
-        return bknumber;
-    }
-
-    public void setBknumber(Integer bknumber) {
-        this.bknumber = bknumber;
     }
 }

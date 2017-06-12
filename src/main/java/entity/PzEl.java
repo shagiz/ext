@@ -7,11 +7,7 @@ import javax.persistence.Table;
 //пьезоэлектрические коэффициенты
 @Entity
 @Table(name = "PzElTabl")
-public class PzEl extends BaseEntity {
-
-    @ColumnProperty(name = "Номер соединения")
-    @Column(name = "HeadClue", nullable = false)
-    private int headClue;
+public class PzEl extends BaseHeadClueEntity {
 
     @ColumnProperty(name = "Сингония")
     @Column(name = "SingCode")
@@ -36,18 +32,6 @@ public class PzEl extends BaseEntity {
     @ColumnProperty(name = "Примечания")
     @Column(name = "MethodPz")
     private String methodPz;
-
-    @ColumnProperty(name = "Номер ссылки")
-    @Column(name = "bknumber")
-    private Integer bknumber;
-
-    public int getHeadClue() {
-        return headClue;
-    }
-
-    public void setHeadClue(int headClue) {
-        this.headClue = headClue;
-    }
 
     public String getSingCode() {
         return singCode;
@@ -95,13 +79,5 @@ public class PzEl extends BaseEntity {
 
     public void setMethodPz(String methodPz) {
         this.methodPz = methodPz;
-    }
-
-    public Integer getBknumber() {
-        return bknumber;
-    }
-
-    public void setBknumber(Integer bknumber) {
-        this.bknumber = bknumber;
     }
 }

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table(name = "SistTabl")
 public class Sist extends BaseEntity {
 
-    @ColumnProperty(name = "Номер соединения")
+    @ColumnProperty(name = "Номер соединения", allowBlank = false, readOnly = true)
     @Column(name = "HeadClue", nullable = false)
     private int headClue;
 

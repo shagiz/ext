@@ -7,11 +7,7 @@ import javax.persistence.Table;
 //Удельная теплоемкость
 @Entity
 @Table(name = "HeatTabl")
-public class Heat extends BaseEntity {
-
-    @ColumnProperty(name = "Номер соединения")
-    @Column(name = "HeadClue", nullable = false)
-    private int headClue;
+public class Heat extends BaseHeadClueEntity {
 
     @ColumnProperty(name = "Температура, K")
     @Column(name = "Temperat")
@@ -32,19 +28,6 @@ public class Heat extends BaseEntity {
     @ColumnProperty(name = "Примечания")
     @Column(name = "MethodC")
     private String methodC;
-
-    @ColumnProperty(name = "Ссылка")
-    @Column(name = "Bknumber")
-    private Integer bknumber;
-
-    public int getHeadClue() {
-        return headClue;
-    }
-
-    public void setHeadClue(int headClue) {
-        this.headClue = headClue;
-    }
-
     public Double getTemperat() {
         return temperat;
     }
@@ -83,13 +66,5 @@ public class Heat extends BaseEntity {
 
     public void setMethodC(String methodC) {
         this.methodC = methodC;
-    }
-
-    public Integer getBknumber() {
-        return bknumber;
-    }
-
-    public void setBknumber(Integer bknumber) {
-        this.bknumber = bknumber;
     }
 }

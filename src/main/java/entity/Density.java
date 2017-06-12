@@ -7,12 +7,7 @@ import javax.persistence.Table;
 //Плотность
 @Entity
 @Table(name = "DensTabl")
-public class Density extends BaseEntity {
-
-    @ColumnProperty(name = "Номер соединения")
-    @Column(name = "HeadClue", nullable = false)
-    private int headClue;
-
+public class Density extends BaseHeadClueEntity {
     @ColumnProperty(name = "Плотность, г/см3")
     @Column(name = "Density")
     private Float density;
@@ -24,18 +19,6 @@ public class Density extends BaseEntity {
     @ColumnProperty(name = "Примечания")
     @Column(name = "MethodD")
     private String methodD;
-
-    @ColumnProperty(name = "Ссылка")
-    @Column(name = "Bknumber")
-    private Integer bknumber;
-
-    public int getHeadClue() {
-        return headClue;
-    }
-
-    public void setHeadClue(int headClue) {
-        this.headClue = headClue;
-    }
 
     public Float getDensity() {
         return density;
@@ -59,13 +42,5 @@ public class Density extends BaseEntity {
 
     public void setMethodD(String methodD) {
         this.methodD = methodD;
-    }
-
-    public Integer getBknumber() {
-        return bknumber;
-    }
-
-    public void setBknumber(Integer bknumber) {
-        this.bknumber = bknumber;
     }
 }

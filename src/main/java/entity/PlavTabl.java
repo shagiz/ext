@@ -6,12 +6,7 @@ import java.math.BigDecimal;
 //Температура плавления
 @Entity
 @Table(name = "PlavTabl")
-public class PlavTabl extends BaseEntity {
-
-    @ColumnProperty(name = "Номер соединения")
-    @Column(name = "HeadClue", nullable = false)
-    private int headClue;
-
+public class PlavTabl extends BaseHeadClueEntity {
     @ColumnProperty(name = "Тип плавления")
     @Column(name = "PlavType")
     private String plavType;
@@ -23,26 +18,6 @@ public class PlavTabl extends BaseEntity {
     @ColumnProperty(name = "Погрешность, K")
     @Column(name = "ErrPlav")
     private BigDecimal errPlav;
-
-    @ColumnProperty(name = "Ссылка")
-    @Column(name = "Bknumber")
-    private Integer bknumber;
-
-    public int getHeadClue() {
-        return headClue;
-    }
-
-    public void setHeadClue(int headClue) {
-        this.headClue = headClue;
-    }
-
-    public Integer getBknumber() {
-        return bknumber;
-    }
-
-    public void setBknumber(Integer bknumber) {
-        this.bknumber = bknumber;
-    }
 
     public String getPlavType() {
         return plavType;

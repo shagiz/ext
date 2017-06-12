@@ -7,11 +7,7 @@ import javax.persistence.Table;
 //Акустооптические свойства
 @Entity
 @Table(name = "AcOpTabl")
-public class Acop extends BaseEntity {
-
-    @ColumnProperty(name = "Номер соединения")
-    @Column(name = "HeadClue")
-    private Integer headClue;
+public class Acop extends BaseHeadClueEntity {
 
     @ColumnProperty(name = "Длина волны, мкм")
     @Column(name = "WaveLeng")
@@ -43,18 +39,6 @@ public class Acop extends BaseEntity {
     @ColumnProperty(name = "M3, 10-12 см*сек2/г")
     @Column(name = "M3")
     private Double m3;
-
-    @ColumnProperty(name = "Ссылка")
-    @Column(name = "Bknumber")
-    private Integer bknumber;
-
-    public Integer getHeadClue() {
-        return headClue;
-    }
-
-    public void setHeadClue(Integer headClue) {
-        this.headClue = headClue;
-    }
 
     public Double getWaveLeng() {
         return waveLeng;
@@ -118,13 +102,5 @@ public class Acop extends BaseEntity {
 
     public void setM3(Double m3) {
         this.m3 = m3;
-    }
-
-    public Integer getBknumber() {
-        return bknumber;
-    }
-
-    public void setBknumber(Integer bkNumber) {
-        this.bknumber = bkNumber;
     }
 }
