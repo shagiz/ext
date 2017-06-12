@@ -225,6 +225,7 @@ Ext.define('MVC.view.Main', {
             clicksToMoveEditor: 2,
             autoCancel: false
         });
+
         function createStore(fields, entity) {
             var url = 'rest/table?entity=' + entity;
             if (element != null && element != undefined) {
@@ -371,27 +372,27 @@ Ext.define('MVC.view.Main', {
                     {text: "Теплоемкость", leaf: true, entity: 'Heat'},
                     {text: "Плотность", leaf: true, entity: 'Density'},
                     {text: "Пьезоэлектрические коэффициенты", leaf: true, entity: 'PzEl'},
-                    {text: "Твердость", leaf: true},
-                    {text: "Растворимость", leaf: true},
-                    {text: "Температура плавления", leaf: true},
-                    {text: "Температура Кюри", leaf: true},
-                    {text: "Данные по полиморфным модификациям", leaf: true},
-                    {text: "Параметры элементарной ячейки", leaf: true},
-                    {text: "Тепловое расширение", leaf: true},
-                    {text: "Теплопроводность", leaf: true},
-                    {text: "Диэлектрическая проницаемость", leaf: true},
-                    {text: "Диэлектрические потери", leaf: true},
-                    {text: "Коэффициенты электромеханической связи", leaf: true},
-                    {text: "Упругие жесткости (податливости)", leaf: true},
-                    {text: "Область оптической прозрачности", leaf: true},
-                    {text: "Показатели преломления", leaf: true},
-                    {text: "Коэффициенты Селмейера", leaf: true},
-                    {text: "Электрооптические коэффициенты", leaf: true},
-                    {text: "Нелинейно-оптические коэффициенты", leaf: true},
-                    {text: "Компоненты тензора Миллера", leaf: true},
-                    {text: "Упруго(пьезо)оптические коэффициенты", leaf: true},
-                    {text: "Коэффициенты затухания упругих волн", leaf: true},
-                    {text: "Подписи к рисункам", leaf: true}
+                    {text: "Твердость", leaf: true, entity: 'HardTabl'},
+                    {text: "Растворимость", leaf: true, entity: 'SuspTabl'},
+                    {text: "Температура плавления", leaf: true, entity: 'PlavTabl'},
+                    {text: "Температура Кюри", leaf: true, entity: 'CuryTabl'},
+                    {text: "Данные по полиморфным модификациям", leaf: true, entity:''},
+                    {text: "Параметры элементарной ячейки", leaf: true, entity: 'ElemTabl'},
+                    {text: "Тепловое расширение", leaf: true, entity: 'HeatExpn'},
+                    {text: "Теплопроводность", leaf: true, entity: 'HeatExpn'},
+                    {text: "Диэлектрическая проницаемость", leaf: true, entity: 'Dielectr'},
+                    {text: "Диэлектрические потери", leaf: true, entity: 'DielDiss'},
+                    {text: "Коэффициенты электромеханической связи", leaf: true, entity: 'MechTabl'},
+                    {text: "Упругие жесткости (податливости)", leaf: true, entity: 'Elastic1'},
+                    {text: "Область оптической прозрачности", leaf: true, entity: 'Wavepure'},
+                    {text: "Показатели преломления", leaf: true, entity: 'RefrcInd'},
+                    {text: "Коэффициенты Селмейера", leaf: true, entity: 'ConstSel'},
+                    {text: "Электрооптические коэффициенты", leaf: true, entity: 'ElOpTabl'},
+                    {text: "Нелинейно-оптические коэффициенты", leaf: true, entity: 'NlOpTabl'},
+                    {text: "Компоненты тензора Миллера", leaf: true, entity: 'MNOpTabl'},
+                    {text: "Упруго(пьезо)оптические коэффициенты", leaf: true, entity:'EsOpTabl'},
+                    {text: "Коэффициенты затухания упругих волн", leaf: true, entity: 'DecrTabl'},
+                    {text: "Подписи к рисункам", leaf: true, entity:''}
                 ]
             }
         });

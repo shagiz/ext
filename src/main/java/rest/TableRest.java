@@ -191,6 +191,42 @@ public class TableRest {
                 return allDao.getBiblioDao();
             case "PzEl":
                 return allDao.getPzElDao();
+            case "Hard":
+                return allDao.getHardTablDao();
+            case "SuspTabl":
+                return allDao.getSuspDao();
+            case "PlavTabl":
+                return allDao.getPlavTablDao();
+            case "CuryTabl":
+                return allDao.getCuryTablDao();
+            case "ElemTabl":
+                return allDao.getElemTablDao();
+            case "HeatExpn":
+                return allDao.getHeatExpnDao();
+            case "Dielectr":
+                return allDao.getDielectrDao();
+            case "DielDiss":
+                return allDao.getDielDissDao();
+            case "MechTabl":
+                return allDao.getMechTablDao();
+            case "Elastic1":
+                return allDao.getElastic1Dao();
+            case "Wavepure":
+                return allDao.getWavepureDao();
+            case "RefrcInd":
+                return allDao.getRefrcIndDao();
+            case "ConstSel":
+                return allDao.getConstSelDao();
+            case "ElOpTabl":
+                return allDao.getElOpTablDao();
+            case "NlOpTabl":
+                return allDao.getNlOpTablDao();
+            case "MNOpTabl":
+                return allDao.getMNOpTablDao();
+            case "EsOpTabl":
+                return allDao.getEsOpTablDao();
+            case "DecrTabl":
+                return allDao.getDecrTablDao();
         }
         return null;
     }
@@ -223,7 +259,12 @@ public class TableRest {
                     fieldType = "numberfield";
                 }
 
-                columns.add(new Column(field.getName(), field.getName(), 1 % field.getName().length(), allowBlank, readOnly, fieldType));
+                String name = field.getName();
+                if (field.getAnnotation(ColumnName.class) != null) {
+                    name = field.getAnnotation(ColumnName.class).name();
+                }
+
+                columns.add(new Column(name, field.getName(), 1 % field.getName().length(), allowBlank, readOnly, fieldType));
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

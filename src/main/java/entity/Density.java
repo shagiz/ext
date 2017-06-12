@@ -5,22 +5,28 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 
+//Плотность
 @Entity
 @Table(name = "DensTabl")
 public class Density extends BaseEntity {
 
+    @ColumnName(name = "Номер соединения")
     @Column(name = "HeadClue", nullable = false)
     private int headClue;
 
+    @ColumnName(name = "Плотность, г/см3")
     @Column(name = "Density")
     private Float density;
 
+    @ColumnName(name = "Погрешность, г/см3")
     @Column(name = "ErrDens")
     private Float errDens;
 
+    @ColumnName(name = "Примечания")
     @Column(name = "MethodD")
     private String methodD;
 
+    @ColumnName(name = "Ссылка")
     @Column(name = "Bknumber")
     private Integer bknumber;
 

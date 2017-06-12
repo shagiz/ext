@@ -4,28 +4,36 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+//Удельная теплоемкость
 @Entity
 @Table(name = "HeatTabl")
 public class Heat extends BaseEntity {
 
+    @ColumnName(name = "Номер соединения")
     @Column(name = "HeadClue", nullable = false)
     private int headClue;
 
+    @ColumnName(name = "Температура, K")
     @Column(name = "Temperat")
     private Double temperat;
 
+    @ColumnName(name = "Обозначение коэффициента")
     @Column(name = "ZnC")
     private String znc;
 
+    @ColumnName(name = "Теплоемко-сть, Дж/кг*K")
     @Column(name = "C")
     private Double c;
 
+    @ColumnName(name = "Погреш-ность, Дж/кг*K")
     @Column(name = "ErrC")
     private Double errc;
 
+    @ColumnName(name = "Примечания")
     @Column(name = "MethodC")
     private String methodC;
 
+    @ColumnName(name = "Ссылка")
     @Column(name = "Bknumber")
     private Integer bknumber;
 

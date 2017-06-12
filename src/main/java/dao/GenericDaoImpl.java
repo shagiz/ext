@@ -8,7 +8,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class GenericDaoImpl<E> implements GenericDao<E> {
+public abstract class GenericDaoImpl<E> implements GenericDao<E> {
 
     protected EntityManager em = Persistence.createEntityManagerFactory("MyPersist").createEntityManager();
 
