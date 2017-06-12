@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Path("/table")
@@ -235,7 +236,13 @@ public class TableRest {
         List<Column> columns = new ArrayList<>();
         try {
             Class clazz = Class.forName("entity." + entity);
-            Field[] fields = clazz.getDeclaredFields();
+            Field[] classFields = clazz.getDeclaredFields();
+            List<Field> fields = Arrays.asList(classFields);
+            if (clazz.getSuperclass().equals(BaseHeadClueEntity.class)) {
+                fields = new ArrayList<>(fields);
+                fields.addAll(Arrays.asList(clazz.getSuperclass().getDeclaredFields()));
+            }
+
             for (Field field : fields) {
                 boolean readOnly = false;
                 boolean allowBlank = true;
