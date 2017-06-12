@@ -9,27 +9,27 @@ import java.math.BigDecimal;
 @Table(name = "EsOpTabl")
 public class EsOpTabl extends BaseHeadClueEntity {
 
-    @ColumnName(name = "Сингония")
+    @ColumnProperty(name = "Сингония")
     @Column(name = "SingCode")
     private String singCode;
 
-    @ColumnName(name = "Длина волны, мкм")
+    @ColumnProperty(name = "Длина волны, мкм")
     @Column(name = "LengWave")
     private BigDecimal LengWave;
 
-    @ColumnName(name = "Обозначение коэффициента")
+    @ColumnProperty(name = "Обозначение коэффициента")
     @Column(name = "ZnP")
     private String ZnP;
 
-    @ColumnName(name = "Значение коэффициента")
+    @ColumnProperty(name = "Значение коэффициента")
     @Column(name = "P")
     private BigDecimal P;
 
-    @ColumnName(name = "Погрешность")
+    @ColumnProperty(name = "Погрешность")
     @Column(name = "ErrP")
     private BigDecimal ErrP;
 
-    @ColumnName(name = "Примечания")
+    @ColumnProperty(name = "Примечания")
     @Column(name = "MethodP")
     private String MethodP;
 

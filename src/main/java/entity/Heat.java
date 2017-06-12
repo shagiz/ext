@@ -9,31 +9,31 @@ import javax.persistence.Table;
 @Table(name = "HeatTabl")
 public class Heat extends BaseEntity {
 
-    @ColumnName(name = "Номер соединения")
+    @ColumnProperty(name = "Номер соединения")
     @Column(name = "HeadClue", nullable = false)
     private int headClue;
 
-    @ColumnName(name = "Температура, K")
+    @ColumnProperty(name = "Температура, K")
     @Column(name = "Temperat")
     private Double temperat;
 
-    @ColumnName(name = "Обозначение коэффициента")
+    @ColumnProperty(name = "Обозначение коэффициента")
     @Column(name = "ZnC")
     private String znc;
 
-    @ColumnName(name = "Теплоемко-сть, Дж/кг*K")
+    @ColumnProperty(name = "Теплоемко-сть, Дж/кг*K")
     @Column(name = "C")
     private Double c;
 
-    @ColumnName(name = "Погреш-ность, Дж/кг*K")
+    @ColumnProperty(name = "Погреш-ность, Дж/кг*K")
     @Column(name = "ErrC")
     private Double errc;
 
-    @ColumnName(name = "Примечания")
+    @ColumnProperty(name = "Примечания")
     @Column(name = "MethodC")
     private String methodC;
 
-    @ColumnName(name = "Ссылка")
+    @ColumnProperty(name = "Ссылка")
     @Column(name = "Bknumber")
     private Integer bknumber;
 

@@ -9,35 +9,35 @@ import java.math.BigDecimal;
 @Table(name = "HardTabl")
 public class HardTabl extends BaseEntity {
 
-    @ColumnName(name = "Номер соединения")
+    @ColumnProperty(name = "Номер соединения")
     @Column(name = "HeadClue")
     private Integer headClue;
 
-    @ColumnName(name = "Min")
+    @ColumnProperty(name = "Min")
     @Column(name = "Hard1")
     private BigDecimal hard1;
 
-    @ColumnName(name = "Max")
+    @ColumnProperty(name = "Max")
     @Column(name = "Hard2")
     private BigDecimal hard2;
 
-    @ColumnName(name = "Погрешность")
+    @ColumnProperty(name = "Погрешность")
     @Column(name = "ErrHard")
     private BigDecimal errHard;
 
-    @ColumnName(name = "Моос")
+    @ColumnProperty(name = "Моос")
     @Column(name = "Mohs")
     private BigDecimal mohs;
 
-    @ColumnName(name = "Погрешность Моос")
+    @ColumnProperty(name = "Погрешность Моос")
     @Column(name = "ErrMohs")
     private BigDecimal errMohs;
 
-    @ColumnName(name = "Примечания")
+    @ColumnProperty(name = "Примечания")
     @Column(name = "MethodH")
     private String methodH;
 
-    @ColumnName(name = "Ссылка")
+    @ColumnProperty(name = "Ссылка")
     @Column(name = "Bknumber")
     private Integer bknumber;
 

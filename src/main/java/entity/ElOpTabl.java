@@ -9,27 +9,27 @@ import java.math.BigDecimal;
 @Table(name = "ElOpTabl")
 public class ElOpTabl extends BaseHeadClueEntity {
 
-    @ColumnName(name = "Сингония")
+    @ColumnProperty(name = "Сингония")
     @Column(name = "SingCode")
     private String singCode;
 
-    @ColumnName(name = "Длина волны, мкм")
+    @ColumnProperty(name = "Длина волны, мкм")
     @Column(name = "WvLeng")
     private BigDecimal wvLeng;
 
-    @ColumnName(name = "Обозначение коэффициента")
+    @ColumnProperty(name = "Обозначение коэффициента")
     @Column(name = "ZnN1")
     private String znN1;
 
-    @ColumnName(name = "Значение коэффициента")
+    @ColumnProperty(name = "Значение коэффициента")
     @Column(name = "R")
     private BigDecimal R;
 
-    @ColumnName(name = "Погрешность")
+    @ColumnProperty(name = "Погрешность")
     @Column(name = "ErrR")
     private BigDecimal errR;
 
-    @ColumnName(name = "Примечания")
+    @ColumnProperty(name = "Примечания")
     @Column(name = "MethodR")
     private String methodR;
 

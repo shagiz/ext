@@ -9,35 +9,35 @@ import javax.persistence.Table;
 @Table(name = "PzElTabl")
 public class PzEl extends BaseEntity {
 
-    @ColumnName(name = "Номер соединения")
+    @ColumnProperty(name = "Номер соединения")
     @Column(name = "HeadClue", nullable = false)
     private int headClue;
 
-    @ColumnName(name = "Сингония")
+    @ColumnProperty(name = "Сингония")
     @Column(name = "SingCode")
     private String singCode;
 
-    @ColumnName(name = "Частота, МГц")
+    @ColumnProperty(name = "Частота, МГц")
     @Column(name = "FreqPzEl")
     private Double freqPzEl;
 
-    @ColumnName(name = "Обозначение коэффициента")
+    @ColumnProperty(name = "Обозначение коэффициента")
     @Column(name = "ConstD")
     private String constD;
 
-    @ColumnName(name = "Значение коэффициента")
+    @ColumnProperty(name = "Значение коэффициента")
     @Column(name = "D")
     private Double d;
 
-    @ColumnName(name = "Погрешность")
+    @ColumnProperty(name = "Погрешность")
     @Column(name = "ErrD")
     private Double errD;
 
-    @ColumnName(name = "Примечания")
+    @ColumnProperty(name = "Примечания")
     @Column(name = "MethodPz")
     private String methodPz;
 
-    @ColumnName(name = "Номер ссылки")
+    @ColumnProperty(name = "Номер ссылки")
     @Column(name = "bknumber")
     private Integer bknumber;
 

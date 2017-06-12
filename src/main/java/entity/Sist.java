@@ -9,19 +9,19 @@ import javax.persistence.Table;
 @Table(name = "SistTabl")
 public class Sist extends BaseEntity {
 
-    @ColumnName(name = "Номер соединения")
+    @ColumnProperty(name = "Номер соединения")
     @Column(name = "HeadClue", nullable = false)
     private int headClue;
 
-    @ColumnName(name = "Обозначение хим. элемента")
+    @ColumnProperty(name = "Обозначение хим. элемента")
     @Column(name = "ElemNumb", length = 2)
     private String elemNumb;
 
-    @ColumnName(name = "Нижняя граница области гомогенности")
+    @ColumnProperty(name = "Нижняя граница области гомогенности")
     @Column(name = "MinValue")
     private Double minValue;
 
-    @ColumnName(name = "Верхняя граница области гомогенности")
+    @ColumnProperty(name = "Верхняя граница области гомогенности")
     @Column(name = "MaxValue")
     private Double maxValue;
 

@@ -9,6 +9,12 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({METHOD, FIELD})
 @Retention(RUNTIME)
-public @interface ColumnName {
+public @interface ColumnProperty {
     String name();
+
+    boolean readOnly() default false;
+
+    boolean allowBlank() default true;
+
+    int fieldLength() default 0;
 }

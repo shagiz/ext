@@ -9,31 +9,31 @@ import java.math.BigDecimal;
 @Table(name = "RefrcInd")
 public class RefrcInd extends BaseHeadClueEntity {
 
-    @ColumnName(name = "Сингония")
+    @ColumnProperty(name = "Сингония")
     @Column(name = "SingCode")
     private String singCode;
 
-    @ColumnName(name = "Температура, K")
+    @ColumnProperty(name = "Температура, K")
     @Column(name = "Temper")
     private BigDecimal temper;
 
-    @ColumnName(name = "Длина волны, мкм")
+    @ColumnProperty(name = "Длина волны, мкм")
     @Column(name = "WaveLeng")
     private BigDecimal waveLeng;
 
-    @ColumnName(name = "Обозначение показателя")
+    @ColumnProperty(name = "Обозначение показателя")
     @Column(name = "NazbIndx")
     private String nazbIndx;
 
-    @ColumnName(name = "Значение показателя")
+    @ColumnProperty(name = "Значение показателя")
     @Column(name = "ZnachInd")
     private BigDecimal znachInd;
 
-    @ColumnName(name = "Погрешность")
+    @ColumnProperty(name = "Погрешность")
     @Column(name = "ErrIndex")
     private BigDecimal errIndex;
 
-    @ColumnName(name = "Примечания")
+    @ColumnProperty(name = "Примечания")
     @Column(name = "MethodIn")
     private String methodIn;
 

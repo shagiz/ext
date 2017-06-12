@@ -6,11 +6,11 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class BaseHeadClueEntity extends BaseEntity {
 
-    @ColumnName(name = "Номер соединения")
+    @ColumnProperty(name = "Номер соединения", allowBlank = false, readOnly = true)
     @Column(name = "HeadClue", nullable = false)
     private int headClue;
 
-    @ColumnName(name = "Ссылка")
+    @ColumnProperty(name = "Ссылка", allowBlank = false)
     @Column(name = "Bknumber")
     private Integer bknumber;
 

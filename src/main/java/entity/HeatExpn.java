@@ -9,35 +9,35 @@ import java.math.BigDecimal;
 @Table(name = "HeatExpn")
 public class HeatExpn extends BaseHeadClueEntity {
 
-    @ColumnName(name = "Сингония")
+    @ColumnProperty(name = "Сингония")
     @Column(name = "SingCode")
     private String singCode;
 
-    @ColumnName(name = "Тип данных")
+    @ColumnProperty(name = "Тип данных")
     @Column(name = "DataType", nullable = false)
     private Integer dataType;
 
-    @ColumnName(name = "Температура, K (Min)")
+    @ColumnProperty(name = "Температура, K (Min)")
     @Column(name = "Temper_1")
     private BigDecimal temper1;
 
-    @ColumnName(name = "Температура, K (Max)")
+    @ColumnProperty(name = "Температура, K (Max)")
     @Column(name = "Temper_2")
     private BigDecimal temper2;
 
-    @ColumnName(name = "Обозначение коэффициента")
+    @ColumnProperty(name = "Обозначение коэффициента")
     @Column(name = "Znak1")
     private String znak1;
 
-    @ColumnName(name = "Значение коэффициента")
+    @ColumnProperty(name = "Значение коэффициента")
     @Column(name = "S11")
     private BigDecimal S11;
 
-    @ColumnName(name = "Погрешность")
+    @ColumnProperty(name = "Погрешность")
     @Column(name = "ErrHExp")
     private BigDecimal errHExp;
 
-    @ColumnName(name = "Примечания")
+    @ColumnProperty(name = "Примечания")
     @Column(name = "MethodEx")
     private String methodEx;
 

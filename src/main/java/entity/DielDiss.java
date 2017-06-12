@@ -9,31 +9,31 @@ import java.math.BigDecimal;
 @Table(name = "DielDiss")
 public class DielDiss extends BaseHeadClueEntity {
 
-    @ColumnName(name = "Сингония")
+    @ColumnProperty(name = "Сингония")
     @Column(name = "SingCode")
     private String singCode;
 
-    @ColumnName(name = "Частота, МГц")
+    @ColumnProperty(name = "Частота, МГц")
     @Column(name = "FreqDiss")
     private BigDecimal freqDiss;
 
-    @ColumnName(name = "Температура, K")
+    @ColumnProperty(name = "Температура, K")
     @Column(name = "Temper_3")
     private BigDecimal temper3;
 
-    @ColumnName(name = "Обозначение тангенса угла потерь")
+    @ColumnProperty(name = "Обозначение тангенса угла потерь")
     @Column(name = "TangName")
     private String tangName;
 
-    @ColumnName(name = "Значение тангенса угла")
+    @ColumnProperty(name = "Значение тангенса угла")
     @Column(name = "TangentD")
     private BigDecimal tangentD;
 
-    @ColumnName(name = "Погрешность")
+    @ColumnProperty(name = "Погрешность")
     @Column(name = "ErrDiss")
     private BigDecimal errDiss;
 
-    @ColumnName(name = "Примечания")
+    @ColumnProperty(name = "Примечания")
     @Column(name = "MethodY")
     private String methodY;
 

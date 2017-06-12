@@ -9,31 +9,31 @@ import java.math.BigDecimal;
 @Table(name = "SuspTabl")
 public class SuspTabl extends BaseEntity {
 
-    @ColumnName(name = "Номер соединения")
+    @ColumnProperty(name = "Номер соединения")
     @Column(name = "HeadClue", nullable = false)
     private int headClue;
 
-    @ColumnName(name = "Температура, K")
+    @ColumnProperty(name = "Температура, K")
     @Column(name = "Temper")
     private BigDecimal temper;
 
-    @ColumnName(name = "Растворитель")
+    @ColumnProperty(name = "Растворитель")
     @Column(name = "SuspName")
     private String suspName;
 
-    @ColumnName(name = "Растворимость, г/100 г раствора")
+    @ColumnProperty(name = "Растворимость, г/100 г раствора")
     @Column(name = "Suspense", nullable = false)
     private BigDecimal suspense;
 
-    @ColumnName(name = "Погрешность, г/100 г")
+    @ColumnProperty(name = "Погрешность, г/100 г")
     @Column(name = "ErrSusp")
     private BigDecimal errSusp;
 
-    @ColumnName(name = "Примечания")
+    @ColumnProperty(name = "Примечания")
     @Column(name = "MethodS")
     private String methodS;
 
-    @ColumnName(name = "Ссылка")
+    @ColumnProperty(name = "Ссылка")
     @Column(name = "Bknumber")
     private Integer bknumber;
 

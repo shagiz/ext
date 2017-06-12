@@ -10,43 +10,43 @@ import java.math.BigDecimal;
 @Table(name = "Dielectr")
 public class Dielectr extends BaseEntity {
 
-    @ColumnName(name = "Номер соединения")
+    @ColumnProperty(name = "Номер соединения")
     @Column(name = "HeadClue", nullable = false)
     private int headClue;
 
-    @ColumnName(name = "Сингония")
+    @ColumnProperty(name = "Сингония")
     @Column(name = "SingCode")
     private String singCode;
 
-    @ColumnName(name = "Частота, МГц")
+    @ColumnProperty(name = "Частота, МГц")
     @Column(name = "FreqDiel")
     private BigDecimal freqDiel;
 
-    @ColumnName(name = "Температура, ")
+    @ColumnProperty(name = "Температура, ")
     @Column(name = "Temper_2")
     private BigDecimal temper2;
 
-    @ColumnName(name = "Условия измерения")
+    @ColumnProperty(name = "Условия измерения")
     @Column(name = "Constant")
     private String constant;
 
-    @ColumnName(name = "Обозначение коэффициента")
+    @ColumnProperty(name = "Обозначение коэффициента")
     @Column(name = "Znak")
     private String znak;
 
-    @ColumnName(name = "Значение коэффициента")
+    @ColumnProperty(name = "Значение коэффициента")
     @Column(name = "Diel")
     private BigDecimal diel;
 
-    @ColumnName(name = "Погрешность")
+    @ColumnProperty(name = "Погрешность")
     @Column(name = "ErrY")
     private BigDecimal errY;
 
-    @ColumnName(name = "Примечания")
+    @ColumnProperty(name = "Примечания")
     @Column(name = "MethodY")
     private String methodY;
 
-    @ColumnName(name = "Ссылка")
+    @ColumnProperty(name = "Ссылка")
     @Column(name = "Bknumber")
     private Integer bknumber;
 

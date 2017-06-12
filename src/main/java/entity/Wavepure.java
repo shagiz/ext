@@ -9,11 +9,11 @@ import java.math.BigDecimal;
 @Table(name = "Wavepure")
 public class Wavepure extends BaseHeadClueEntity {
 
-    @ColumnName(name = "Нижняя граница")
+    @ColumnProperty(name = "Нижняя граница")
     @Column(name = "Leftwave")
     private BigDecimal leftwave;
 
-    @ColumnName(name = "Верхняя граница")
+    @ColumnProperty(name = "Верхняя граница")
     @Column(name = "Rightwave")
     private BigDecimal rightwave;
 

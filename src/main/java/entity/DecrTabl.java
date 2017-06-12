@@ -9,27 +9,27 @@ import java.math.BigDecimal;
 @Table(name = "DecrTabl")
 public class DecrTabl extends BaseHeadClueEntity {
 
-    @ColumnName(name = "Направление распространения")
+    @ColumnProperty(name = "Направление распространения")
     @Column(name = "Nzv")
     private String Nzv;
 
-    @ColumnName(name = "Направление смещения")
+    @ColumnProperty(name = "Направление смещения")
     @Column(name = "Uzv")
     private String Uzv;
 
-    @ColumnName(name = "Тип волны")
+    @ColumnProperty(name = "Тип волны")
     @Column(name = "WaveType")
     private String WaveType;
 
-    @ColumnName(name = "Скорость волны, 10^5 см/сек")
+    @ColumnProperty(name = "Скорость волны, 10^5 см/сек")
     @Column(name = "WaveSpeed")
     private BigDecimal WaveSpeed;
 
-    @ColumnName(name = "Коэффициент затухания, дБ/см")
+    @ColumnProperty(name = "Коэффициент затухания, дБ/см")
     @Column(name = "Decrement")
     private BigDecimal Decrement;
 
-    @ColumnName(name = "Частота электрического поля, МГц")
+    @ColumnProperty(name = "Частота электрического поля, МГц")
     @Column(name = "DecrFreq")
     private BigDecimal DecrFreq;
 

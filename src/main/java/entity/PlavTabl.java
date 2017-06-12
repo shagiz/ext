@@ -8,23 +8,23 @@ import java.math.BigDecimal;
 @Table(name = "PlavTabl")
 public class PlavTabl extends BaseEntity {
 
-    @ColumnName(name = "Номер соединения")
+    @ColumnProperty(name = "Номер соединения")
     @Column(name = "HeadClue", nullable = false)
     private int headClue;
 
-    @ColumnName(name = "Тип плавления")
+    @ColumnProperty(name = "Тип плавления")
     @Column(name = "PlavType")
     private String plavType;
 
-    @ColumnName(name = "Температура, K")
+    @ColumnProperty(name = "Температура, K")
     @Column(name = "PlavTemp")
     private BigDecimal plavTemp;
 
-    @ColumnName(name = "Погрешность, K")
+    @ColumnProperty(name = "Погрешность, K")
     @Column(name = "ErrPlav")
     private BigDecimal errPlav;
 
-    @ColumnName(name = "Ссылка")
+    @ColumnProperty(name = "Ссылка")
     @Column(name = "Bknumber")
     private Integer bknumber;
 

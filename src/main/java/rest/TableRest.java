@@ -239,22 +239,14 @@ public class TableRest {
             Field[] classFields = clazz.getDeclaredFields();
             List<Field> fields = Arrays.asList(classFields);
             if (clazz.getSuperclass().equals(BaseHeadClueEntity.class)) {
-                fields = new ArrayList<>(fields);
-                fields.addAll(Arrays.asList(clazz.getSuperclass().getDeclaredFields()));
+                fields = new ArrayList<>(Arrays.asList(clazz.getSuperclass().getDeclaredFields()));
+                fields.addAll(Arrays.asList(classFields));
             }
 
             for (Field field : fields) {
                 boolean readOnly = false;
                 boolean allowBlank = true;
                 String fieldType = "textfield";
-
-                if ("headClue".equals(field.getName()) || "bknumber".equals(field.getName())) {
-                    allowBlank = false;
-                }
-
-                if ("headClue".equals(field.getName())) {
-                    readOnly = true;
-                }
 
                 if (field.getType() == Integer.TYPE
                         || field.getType() == Integer.class
@@ -267,8 +259,11 @@ public class TableRest {
                 }
 
                 String name = field.getName();
-                if (field.getAnnotation(ColumnName.class) != null) {
-                    name = field.getAnnotation(ColumnName.class).name();
+                if (field.getAnnotation(ColumnProperty.class) != null) {
+                    ColumnProperty columnProperty = field.getAnnotation(ColumnProperty.class);
+                    name = columnProperty.name();
+                    allowBlank = columnProperty.allowBlank();
+                    readOnly = columnProperty.readOnly();
                 }
 
                 columns.add(new Column(name, field.getName(), 1 % field.getName().length(), allowBlank, readOnly, fieldType));

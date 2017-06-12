@@ -8,23 +8,23 @@ import java.math.BigDecimal;
 @Table(name = "CuryTabl")
 public class CuryTabl extends BaseEntity {
 
-    @ColumnName(name = "Номер соединения")
+    @ColumnProperty(name = "Номер соединения")
     @Column(name = "HeadClue", nullable = false)
     private int headClue;
 
-    @ColumnName(name = "Температура, K")
+    @ColumnProperty(name = "Температура, K")
     @Column(name = "CuryTemp")
     private BigDecimal curyTemp;
 
-    @ColumnName(name = "Погрешность, K")
+    @ColumnProperty(name = "Погрешность, K")
     @Column(name = "ErrCury")
     private BigDecimal errCury;
 
-    @ColumnName(name = "Тип фазового перехода")
+    @ColumnProperty(name = "Тип фазового перехода")
     @Column(name = "Oboztran")
     private String oboztran;
 
-    @ColumnName(name = "Ссылка")
+    @ColumnProperty(name = "Ссылка")
     @Column(name = "Bknumber")
     private Integer bknumber;
 
