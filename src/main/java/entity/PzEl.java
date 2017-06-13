@@ -9,23 +9,23 @@ import javax.persistence.Table;
 @Table(name = "PzElTabl")
 public class PzEl extends BaseHeadClueEntity {
 
-    @ColumnProperty(name = "Сингония")
+    @ColumnProperty(name = "Сингония", fieldLength = 2)
     @Column(name = "SingCode")
     private String singCode;
 
-    @ColumnProperty(name = "Частота, МГц")
+    @ColumnProperty(name = "Частота, МГц", fieldLength = 25)
     @Column(name = "FreqPzEl")
     private Double freqPzEl;
 
-    @ColumnProperty(name = "Обозначение коэффициента")
+    @ColumnProperty(name = "Обозначение коэффициента", fieldLength = 25)
     @Column(name = "ConstD")
     private String constD;
 
-    @ColumnProperty(name = "Значение коэффициента")
+    @ColumnProperty(name = "Значение коэффициента", fieldLength = 25)
     @Column(name = "D")
     private Double d;
 
-    @ColumnProperty(name = "Погрешность")
+    @ColumnProperty(name = "Погрешность", fieldLength = 25)
     @Column(name = "ErrD")
     private Double errD;
 

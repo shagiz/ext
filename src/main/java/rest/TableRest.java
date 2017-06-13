@@ -247,6 +247,7 @@ public class TableRest {
                 boolean readOnly = false;
                 boolean allowBlank = true;
                 String fieldType = "textfield";
+                int fieldLength = 0;
 
                 if (field.getType() == Integer.TYPE
                         || field.getType() == Integer.class
@@ -264,9 +265,19 @@ public class TableRest {
                     name = columnProperty.name();
                     allowBlank = columnProperty.allowBlank();
                     readOnly = columnProperty.readOnly();
+                    fieldLength = columnProperty.fieldLength();
                 }
 
-                columns.add(new Column(name, field.getName(), 1 % field.getName().length(), allowBlank, readOnly, fieldType));
+                columns.add(new Column(
+                                name,
+                                field.getName(),
+                                1 % field.getName().length(),
+                                allowBlank,
+                                readOnly,
+                                fieldType,
+                                fieldLength
+                        )
+                );
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

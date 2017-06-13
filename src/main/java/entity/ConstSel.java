@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Table(name = "ConstSel")
 public class ConstSel extends BaseHeadClueEntity {
 
-    @ColumnProperty(name = "Сингония")
+    @ColumnProperty(name = "Сингония", fieldLength = 2)
     @Column(name = "SingCode")
     private String singCode;
 
@@ -17,7 +17,7 @@ public class ConstSel extends BaseHeadClueEntity {
     @Column(name = "Equation")
     private String equation;
 
-    @ColumnProperty(name = "Название коэффициента")
+    @ColumnProperty(name = "Название коэффициента", fieldLength = 70)
     @Column(name = "NazvSel")
     private String nazvSel;
 
@@ -25,7 +25,7 @@ public class ConstSel extends BaseHeadClueEntity {
     @Column(name = "ZnachSel")
     private BigDecimal znachSel;
 
-    @ColumnProperty(name = "Размерность")
+    @ColumnProperty(name = "Размерность", fieldLength = 20)
     @Column(name = "Measure")
     private String measure;
 

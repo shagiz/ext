@@ -9,31 +9,31 @@ import java.math.BigDecimal;
 @Table(name = "ElemTabl")
 public class ElemTabl extends BaseHeadClueEntity {
 
-    @ColumnProperty(name = "Сингония")
+    @ColumnProperty(name = "Сингония", fieldLength = 2)
     @Column(name = "SingCode")
     private String singCode;
 
-    @ColumnProperty(name = "Название линейного параметра")
+    @ColumnProperty(name = "Название линейного параметра", fieldLength = 2)
     @Column(name = "Nazbparam")
     private String nazbparam;
 
-    @ColumnProperty(name = "Значение линейного параметра, A")
+    @ColumnProperty(name = "Значение линейного параметра, A", fieldLength = 20)
     @Column(name = "Znparam")
     private BigDecimal znparam;
 
-    @ColumnProperty(name = "Погрешность, A")
+    @ColumnProperty(name = "Погрешность, A", fieldLength = 20)
     @Column(name = "Errparam")
     private BigDecimal errparam;
 
-    @ColumnProperty(name = "Название угла")
+    @ColumnProperty(name = "Название угла", fieldLength = 20)
     @Column(name = "NazvAngl")
     private String nazvAngl;
 
-    @ColumnProperty(name = "Значение угла, град.")
+    @ColumnProperty(name = "Значение угла, град.", fieldLength = 20)
     @Column(name = "ZnAngle")
     private BigDecimal znAngle;
 
-    @ColumnProperty(name = "Погрешность, град.")
+    @ColumnProperty(name = "Погрешность, град.", fieldLength = 20)
     @Column(name = "ErrAngl")
     private BigDecimal errAngl;
 

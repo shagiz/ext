@@ -9,27 +9,27 @@ import java.math.BigDecimal;
 @Table(name = "Elastic1")
 public class Elastic1 extends BaseHeadClueEntity {
 
-    @ColumnProperty(name = "Сингония")
+    @ColumnProperty(name = "Сингония", fieldLength = 2)
     @Column(name = "SingCode")
     private String singCode;
 
-    @ColumnProperty(name = "Частота, МГц")
+    @ColumnProperty(name = "Частота, МГц", fieldLength = 16)
     @Column(name = "TemperEl")
     private BigDecimal temperEl;
 
-    @ColumnProperty(name = "Температура, K")
+    @ColumnProperty(name = "Температура, K", fieldLength = 6)
     @Column(name = "CondClu1")
     private String condClu1;
 
-    @ColumnProperty(name = "Условия измерения")
+    @ColumnProperty(name = "Условия измерения", fieldLength = 20)
     @Column(name = "ZnE")
     private String ZnE;
 
-    @ColumnProperty(name = "Обозначение коэффициента")
+    @ColumnProperty(name = "Обозначение коэффициента", fieldLength = 26)
     @Column(name = "E1")
     private BigDecimal E1;
 
-    @ColumnProperty(name = "Погрешность")
+    @ColumnProperty(name = "Погрешность", fieldLength = 20)
     @Column(name = "ErrE")
     private BigDecimal errE;
 

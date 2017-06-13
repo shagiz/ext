@@ -7,15 +7,17 @@ public class Column {
     private boolean allowBlank;
     private boolean readOnly;
     private String fieldType;
+    private int fieldLength;
 
 
-    public Column(String text, String dataIndex, int flex, boolean allowBlank, boolean readOnly, String fieldType) {
+    public Column(String text, String dataIndex, int flex, boolean allowBlank, boolean readOnly, String fieldType, int fieldLength) {
         this.text = text;
         this.dataIndex = dataIndex;
         this.flex = flex;
         this.allowBlank = allowBlank;
         this.readOnly = readOnly;
         this.fieldType = fieldType;
+        this.fieldLength = fieldLength;
     }
 
     public boolean isAllowBlank() {
@@ -64,5 +66,13 @@ public class Column {
 
     public void setFlex(int flex) {
         this.flex = flex;
+    }
+
+    public int getFieldLength() {
+        return fieldLength;
+    }
+
+    public void setFieldLength(int fieldLength) {
+        this.fieldLength = fieldLength;
     }
 }

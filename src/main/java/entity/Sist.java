@@ -13,15 +13,15 @@ public class Sist extends BaseEntity {
     @Column(name = "HeadClue", nullable = false)
     private int headClue;
 
-    @ColumnProperty(name = "Обозначение хим. элемента")
+    @ColumnProperty(name = "Обозначение хим. элемента", fieldLength = 2)
     @Column(name = "ElemNumb", length = 2)
     private String elemNumb;
 
-    @ColumnProperty(name = "Нижняя граница области гомогенности")
+    @ColumnProperty(name = "Нижняя граница области гомогенности", fieldLength = 21)
     @Column(name = "MinValue")
     private Double minValue;
 
-    @ColumnProperty(name = "Верхняя граница области гомогенности")
+    @ColumnProperty(name = "Верхняя граница области гомогенности", fieldLength = 21)
     @Column(name = "MaxValue")
     private Double maxValue;
 

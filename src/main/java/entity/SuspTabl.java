@@ -7,73 +7,27 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "SuspTabl")
-public class SuspTabl extends BaseEntity {
+public class SuspTabl extends BaseHeadClueEntity {
 
-    @ColumnProperty(name = "Номер соединения")
-    @Column(name = "HeadClue", nullable = false)
-    private int headClue;
-
-    @ColumnProperty(name = "Температура, K")
+    @ColumnProperty(name = "Температура, K", fieldLength = 17)
     @Column(name = "Temper")
     private BigDecimal temper;
 
-    @ColumnProperty(name = "Растворитель")
+    @ColumnProperty(name = "Растворитель", fieldLength = 50)
     @Column(name = "SuspName")
     private String suspName;
 
-    @ColumnProperty(name = "Растворимость, г/100 г раствора")
+    @ColumnProperty(name = "Растворимость, г/100 г раствора", fieldLength = 21)
     @Column(name = "Suspense", nullable = false)
     private BigDecimal suspense;
 
-    @ColumnProperty(name = "Погрешность, г/100 г")
+    @ColumnProperty(name = "Погрешность, г/100 г", fieldLength = 21)
     @Column(name = "ErrSusp")
     private BigDecimal errSusp;
 
     @ColumnProperty(name = "Примечания")
     @Column(name = "MethodS")
     private String methodS;
-
-    @ColumnProperty(name = "Ссылка")
-    @Column(name = "Bknumber")
-    private Integer bknumber;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SuspTabl susp = (SuspTabl) o;
-
-        if (headClue != susp.headClue) return false;
-        if (temper != null ? !temper.equals(susp.temper) : susp.temper != null) return false;
-        if (suspName != null ? !suspName.equals(susp.suspName) : susp.suspName != null) return false;
-        if (suspense != null ? !suspense.equals(susp.suspense) : susp.suspense != null) return false;
-        if (errSusp != null ? !errSusp.equals(susp.errSusp) : susp.errSusp != null) return false;
-        if (methodS != null ? !methodS.equals(susp.methodS) : susp.methodS != null) return false;
-        return bknumber != null ? bknumber.equals(susp.bknumber) : susp.bknumber == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = headClue;
-        result = 31 * result + (temper != null ? temper.hashCode() : 0);
-        result = 31 * result + (suspName != null ? suspName.hashCode() : 0);
-        result = 31 * result + (suspense != null ? suspense.hashCode() : 0);
-        result = 31 * result + (errSusp != null ? errSusp.hashCode() : 0);
-        result = 31 * result + (methodS != null ? methodS.hashCode() : 0);
-        result = 31 * result + (bknumber != null ? bknumber.hashCode() : 0);
-        return result;
-    }
-
-    public int getHeadClue() {
-
-        return headClue;
-    }
-
-    public void setHeadClue(int headClue) {
-        this.headClue = headClue;
-    }
 
     public BigDecimal getTemper() {
         return temper;
@@ -113,13 +67,5 @@ public class SuspTabl extends BaseEntity {
 
     public void setMethodS(String methodS) {
         this.methodS = methodS;
-    }
-
-    public Integer getBknumber() {
-        return bknumber;
-    }
-
-    public void setBknumber(Integer bknumber) {
-        this.bknumber = bknumber;
     }
 }

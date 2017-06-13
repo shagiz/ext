@@ -376,7 +376,7 @@ Ext.define('MVC.view.Main', {
                     {text: "Растворимость", leaf: true, entity: 'SuspTabl'},
                     {text: "Температура плавления", leaf: true, entity: 'PlavTabl'},
                     {text: "Температура Кюри", leaf: true, entity: 'CuryTabl'},
-                    {text: "Данные по полиморфным модификациям", leaf: true, entity:''},
+                    {text: "Данные по полиморфным модификациям", leaf: true, entity: ''},
                     {text: "Параметры элементарной ячейки", leaf: true, entity: 'ElemTabl'},
                     {text: "Тепловое расширение", leaf: true, entity: 'HeatExpn'},
                     {text: "Теплопроводность", leaf: true, entity: 'HeatExpn'},
@@ -390,9 +390,9 @@ Ext.define('MVC.view.Main', {
                     {text: "Электрооптические коэффициенты", leaf: true, entity: 'ElOpTabl'},
                     {text: "Нелинейно-оптические коэффициенты", leaf: true, entity: 'NlOpTabl'},
                     {text: "Компоненты тензора Миллера", leaf: true, entity: 'MNOpTabl'},
-                    {text: "Упруго(пьезо)оптические коэффициенты", leaf: true, entity:'EsOpTabl'},
+                    {text: "Упруго(пьезо)оптические коэффициенты", leaf: true, entity: 'EsOpTabl'},
                     {text: "Коэффициенты затухания упругих волн", leaf: true, entity: 'DecrTabl'},
-                    {text: "Подписи к рисункам", leaf: true, entity:''}
+                    {text: "Подписи к рисункам", leaf: true, entity: ''}
                 ]
             }
         });
@@ -414,8 +414,9 @@ Ext.define('MVC.view.Main', {
                             if (!item.readOnly) {
                                 item.editor = {
                                     allowBlank: item.allowBlank,
-                                    xtype: item.fieldType
-                                };
+                                    xtype: item.fieldType,
+                                    maxLength: item.fieldLength === 0 ? 100 : item.fieldLength
+                                }
                             }
 
                             fields.push(item.dataIndex);

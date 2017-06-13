@@ -8,15 +8,15 @@ import java.math.BigDecimal;
 @Table(name = "CuryTabl")
 public class CuryTabl extends BaseHeadClueEntity {
 
-    @ColumnProperty(name = "Температура, K")
+    @ColumnProperty(name = "Температура, K", fieldLength = 16)
     @Column(name = "CuryTemp")
     private BigDecimal curyTemp;
 
-    @ColumnProperty(name = "Погрешность, K")
+    @ColumnProperty(name = "Погрешность, K", fieldLength = 16)
     @Column(name = "ErrCury")
     private BigDecimal errCury;
 
-    @ColumnProperty(name = "Тип фазового перехода")
+    @ColumnProperty(name = "Тип фазового перехода", fieldLength = 50)
     @Column(name = "Oboztran")
     private String oboztran;
 

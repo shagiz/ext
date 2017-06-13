@@ -9,23 +9,23 @@ import java.math.BigDecimal;
 @Table(name = "HardTabl")
 public class HardTabl extends BaseHeadClueEntity {
 
-    @ColumnProperty(name = "Min")
+    @ColumnProperty(name = "Min", fieldLength = 20)
     @Column(name = "Hard1")
     private BigDecimal hard1;
 
-    @ColumnProperty(name = "Max")
+    @ColumnProperty(name = "Max", fieldLength = 20)
     @Column(name = "Hard2")
     private BigDecimal hard2;
 
-    @ColumnProperty(name = "Погрешность")
+    @ColumnProperty(name = "Погрешность", fieldLength = 20)
     @Column(name = "ErrHard")
     private BigDecimal errHard;
 
-    @ColumnProperty(name = "Моос")
+    @ColumnProperty(name = "Моос", fieldLength = 20)
     @Column(name = "Mohs")
     private BigDecimal mohs;
 
-    @ColumnProperty(name = "Погрешность Моос")
+    @ColumnProperty(name = "Погрешность Моос", fieldLength = 20)
     @Column(name = "ErrMohs")
     private BigDecimal errMohs;
 

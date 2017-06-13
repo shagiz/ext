@@ -8,11 +8,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "DensTabl")
 public class Density extends BaseHeadClueEntity {
-    @ColumnProperty(name = "Плотность, г/см3")
+    @ColumnProperty(name = "Плотность, г/см3", fieldLength = 16)
     @Column(name = "Density")
     private Float density;
 
-    @ColumnProperty(name = "Погрешность, г/см3")
+    @ColumnProperty(name = "Погрешность, г/см3", fieldLength = 16)
     @Column(name = "ErrDens")
     private Float errDens;
 

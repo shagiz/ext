@@ -9,19 +9,19 @@ import javax.persistence.Table;
 @Table(name = "HeatTabl")
 public class Heat extends BaseHeadClueEntity {
 
-    @ColumnProperty(name = "Температура, K")
+    @ColumnProperty(name = "Температура, K", fieldLength = 16)
     @Column(name = "Temperat")
     private Double temperat;
 
-    @ColumnProperty(name = "Обозначение коэффициента")
+    @ColumnProperty(name = "Обозначение коэффициента", fieldLength = 20)
     @Column(name = "ZnC")
     private String znc;
 
-    @ColumnProperty(name = "Теплоемко-сть, Дж/кг*K")
+    @ColumnProperty(name = "Теплоемко-сть, Дж/кг*K", fieldLength = 20)
     @Column(name = "C")
     private Double c;
 
-    @ColumnProperty(name = "Погреш-ность, Дж/кг*K")
+    @ColumnProperty(name = "Погреш-ность, Дж/кг*K", fieldLength = 20)
     @Column(name = "ErrC")
     private Double errc;
 

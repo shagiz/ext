@@ -10,31 +10,31 @@ import java.math.BigDecimal;
 @Table(name = "Dielectr")
 public class Dielectr extends BaseHeadClueEntity {
 
-    @ColumnProperty(name = "Сингония")
+    @ColumnProperty(name = "Сингония", fieldLength = 2)
     @Column(name = "SingCode")
     private String singCode;
 
-    @ColumnProperty(name = "Частота, МГц")
+    @ColumnProperty(name = "Частота, МГц", fieldLength = 40)
     @Column(name = "FreqDiel")
     private BigDecimal freqDiel;
 
-    @ColumnProperty(name = "Температура, ")
+    @ColumnProperty(name = "Температура, К", fieldLength = 16)
     @Column(name = "Temper_2")
     private BigDecimal temper2;
 
-    @ColumnProperty(name = "Условия измерения")
+    @ColumnProperty(name = "Условия измерения", fieldLength = 10)
     @Column(name = "Constant")
     private String constant;
 
-    @ColumnProperty(name = "Обозначение коэффициента")
+    @ColumnProperty(name = "Обозначение коэффициента", fieldLength = 50)
     @Column(name = "Znak")
     private String znak;
 
-    @ColumnProperty(name = "Значение коэффициента")
+    @ColumnProperty(name = "Значение коэффициента", fieldLength = 24)
     @Column(name = "Diel")
     private BigDecimal diel;
 
-    @ColumnProperty(name = "Погрешность")
+    @ColumnProperty(name = "Погрешность", fieldLength = 24)
     @Column(name = "ErrY")
     private BigDecimal errY;
 

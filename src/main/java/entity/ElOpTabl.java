@@ -9,23 +9,23 @@ import java.math.BigDecimal;
 @Table(name = "ElOpTabl")
 public class ElOpTabl extends BaseHeadClueEntity {
 
-    @ColumnProperty(name = "Сингония")
+    @ColumnProperty(name = "Сингония", fieldLength = 2)
     @Column(name = "SingCode")
     private String singCode;
 
-    @ColumnProperty(name = "Длина волны, мкм")
+    @ColumnProperty(name = "Длина волны, мкм", fieldLength = 20)
     @Column(name = "WvLeng")
     private BigDecimal wvLeng;
 
-    @ColumnProperty(name = "Обозначение коэффициента")
+    @ColumnProperty(name = "Обозначение коэффициента", fieldLength = 50)
     @Column(name = "ZnN1")
     private String znN1;
 
-    @ColumnProperty(name = "Значение коэффициента")
+    @ColumnProperty(name = "Значение коэффициента", fieldLength = 28)
     @Column(name = "R")
     private BigDecimal R;
 
-    @ColumnProperty(name = "Погрешность")
+    @ColumnProperty(name = "Погрешность", fieldLength = 28)
     @Column(name = "ErrR")
     private BigDecimal errR;
 

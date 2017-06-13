@@ -9,23 +9,23 @@ import java.math.BigDecimal;
 @Table(name = "MechTabl")
 public class MechTabl extends BaseHeadClueEntity {
 
-    @ColumnProperty(name = "Сингония")
+    @ColumnProperty(name = "Сингония", fieldLength = 2)
     @Column(name = "SingCode")
     private String singCode;
 
-    @ColumnProperty(name = "Частота, МГц")
+    @ColumnProperty(name = "Частота, МГц", fieldLength = 24)
     @Column(name = "FreqCons")
     private BigDecimal freqCons;
 
-    @ColumnProperty(name = "Температура, K")
+    @ColumnProperty(name = "Температура, K", fieldLength = 16)
     @Column(name = "Temper")
     private BigDecimal temper;
 
-    @ColumnProperty(name = "Обозначение коэффициента")
+    @ColumnProperty(name = "Обозначение коэффициента", fieldLength = 20)
     @Column(name = "ZnK")
     private String ZnK;
 
-    @ColumnProperty(name = "Значение коэффицента")
+    @ColumnProperty(name = "Значение коэффицента", fieldLength = 20)
     @Column(name = "K")
     private BigDecimal K;
 

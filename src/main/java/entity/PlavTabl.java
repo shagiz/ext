@@ -7,15 +7,15 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "PlavTabl")
 public class PlavTabl extends BaseHeadClueEntity {
-    @ColumnProperty(name = "Тип плавления")
+    @ColumnProperty(name = "Тип плавления", fieldLength = 1)
     @Column(name = "PlavType")
     private String plavType;
 
-    @ColumnProperty(name = "Температура, K")
+    @ColumnProperty(name = "Температура, K", fieldLength = 19)
     @Column(name = "PlavTemp")
     private BigDecimal plavTemp;
 
-    @ColumnProperty(name = "Погрешность, K")
+    @ColumnProperty(name = "Погрешность, K", fieldLength = 20)
     @Column(name = "ErrPlav")
     private BigDecimal errPlav;
 
