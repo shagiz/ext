@@ -210,6 +210,12 @@ public class TableRest {
         ).build();
     }
 
+    @GET
+    @Path("/sing")
+    public Response getSingList(@QueryParam("headClue") int headClue) {
+        return Response.ok(allDao.getSingTablDao().findForHeadClue(headClue)).build();
+    }
+
 
     @POST
     @Path("/Acop")

@@ -59,6 +59,8 @@ public class AllDaoImpl implements AllDao {
     private WavepureDao wavepureDao;
     @Inject
     private DecrTablDao decrTablDao;
+    @Inject
+    private SingTablDao singTablDao;
 
     @Override
     public AcopDao getAcopDao() {
@@ -178,6 +180,11 @@ public class AllDaoImpl implements AllDao {
     @Override
     public WavepureDao getWavepureDao() {
         return wavepureDao;
+    }
+
+    @Override
+    public SingTablDao getSingTablDao() {
+        return singTablDao;
     }
 
     @Override

@@ -53,4 +53,6 @@ public interface AllDao {
     NlOpTablDao getNlOpTablDao();
 
     WavepureDao getWavepureDao();
+
+    SingTablDao getSingTablDao();
 }

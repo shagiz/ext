@@ -228,7 +228,7 @@ Ext.define('MVC.view.Main', {
 
         function createStore(fields, entity) {
             var url = 'rest/table?entity=' + entity;
-            if (element != null && element != undefined) {
+            if (element) {
                 url += '&headClue=' + element;
             }
 
@@ -397,7 +397,7 @@ Ext.define('MVC.view.Main', {
             }
         });
 
-        // -------------------------------------------------------------------------------------------------------------
+        // КОЛОНКИ -------------------------------------------------------------------------------------------------------------
 
         treePanel.getSelectionModel().on('select', function (selModel, record) {
             if (record.get('leaf')) {
@@ -412,10 +412,62 @@ Ext.define('MVC.view.Main', {
                         fields = [];
                         col.forEach(function (item) {
                             if (!item.readOnly) {
-                                item.editor = {
-                                    allowBlank: item.allowBlank,
-                                    xtype: item.fieldType,
-                                    maxLength: item.fieldLength === 0 ? 100 : item.fieldLength
+                                if (item.dataIndex === 'bknumber') {
+
+                                    var bkNumberStore = Ext.create('Ext.data.Store', {
+                                        fields: ['bknumber'],
+                                        pageSize: 20,
+                                        remoteSort: true,
+                                        proxy: {
+                                            type: 'ajax',
+                                            method: 'get',
+                                            url: 'rest/table?entity=Biblio',
+                                            reader: {
+                                                type: 'json',
+                                                root: 'data',
+                                                totalProperty: 'total'
+                                            }
+                                        }
+                                    });
+
+                                    item.editor = Ext.create('Ext.form.ComboBox', {
+                                        store: bkNumberStore,
+                                        queryMode: 'remote',
+                                        forceSelection: true,
+                                        allowBlank: false,
+                                        minChars: 1,
+                                        displayField: 'bknumber',
+                                        queryParam: 'bkNumber',
+                                        valueField: 'bknumber'
+                                    });
+
+                                } else if (item.dataIndex === 'singCode') {
+
+                                    var singStore = Ext.create('Ext.data.Store', {
+                                        fields: ['singClue', 'singType'],
+                                        proxy: {
+                                            type: 'ajax',
+                                            method: 'get',
+                                            url: 'rest/table/sing?headClue=' + element
+                                        }
+                                    });
+
+                                    item.editor =  Ext.create('Ext.form.ComboBox', {
+                                        store: singStore,
+                                        queryMode: 'local',
+                                        forceSelection: true,
+                                        allowBlank: false,
+                                        minChars: 1,
+                                        displayField: 'singType',
+                                        valueField: 'singType'
+                                    });
+
+                                } else {
+                                    item.editor = {
+                                        allowBlank: item.allowBlank,
+                                        xtype: item.fieldType,
+                                        maxLength: item.fieldLength === 0 ? 100 : item.fieldLength
+                                    }
                                 }
                             }
 
