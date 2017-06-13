@@ -93,89 +93,11 @@ public class TableRest {
                 jsonElement = parser.parse(gson.toJson(genericDao.findAll(page, start, limit, sort, headClue)));
             }
 
-            object.addProperty("total", genericDao.findAll().size());
+            object.addProperty("total", genericDao.count(headClue));
             object.add("data", jsonElement.getAsJsonArray());
             return Response.ok(object.toString()).build();
         }
         return Response.noContent().build();
-    }
-
-    @POST
-    @Path("/Acop")
-    @Consumes("application/json")
-    public Response putAcop(List<Acop> data) {
-        GenericDao<Acop> genericDao = allDao.getAcopDao();
-
-        if (genericDao != null) {
-            data.forEach(genericDao::update);
-            return Response.ok().build();
-        }
-        return Response.serverError().build();
-    }
-
-    @POST
-    @Path("/Density")
-    @Consumes("application/json")
-    public Response putDensity(List<Density> data) {
-        GenericDao<Density> genericDao = allDao.getDensityDao();
-
-        if (genericDao != null) {
-            data.forEach(genericDao::update);
-            return Response.ok().build();
-        }
-        return Response.serverError().build();
-    }
-
-    @POST
-    @Path("/Sist")
-    @Consumes("application/json")
-    public Response putSist(List<Sist> data) {
-        GenericDao<Sist> genericDao = allDao.getSistDao();
-
-        if (genericDao != null) {
-            data.forEach(genericDao::update);
-            return Response.ok().build();
-        }
-        return Response.serverError().build();
-    }
-
-    @POST
-    @Path("/Heat")
-    @Consumes("application/json")
-    public Response putHeat(List<Heat> data) {
-        GenericDao<Heat> genericDao = allDao.getHeatDao();
-
-        if (genericDao != null) {
-            data.forEach(genericDao::update);
-            return Response.ok().build();
-        }
-        return Response.serverError().build();
-    }
-
-    @POST
-    @Path("/PzEl")
-    @Consumes("application/json")
-    public Response putPzEl(List<PzEl> data) {
-        GenericDao<PzEl> genericDao = allDao.getPzElDao();
-
-        if (genericDao != null) {
-            data.forEach(genericDao::update);
-            return Response.ok().build();
-        }
-        return Response.serverError().build();
-    }
-
-    @POST
-    @Path("/Biblio")
-    @Consumes("application/json")
-    public Response putBiblio(List<Biblio> data) {
-        GenericDao<Biblio> genericDao = allDao.getBiblioDao();
-
-        if (genericDao != null) {
-            data.forEach(genericDao::update);
-            return Response.ok().build();
-        }
-        return Response.serverError().build();
     }
 
     private GenericDao getDao(String entity) {
@@ -286,5 +208,331 @@ public class TableRest {
         return Response.ok(
                 columns
         ).build();
+    }
+
+
+    @POST
+    @Path("/Acop")
+    @Consumes("application/json")
+    public Response putAcop(List<Acop> data) {
+        GenericDao<Acop> genericDao = allDao.getAcopDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/Biblio")
+    @Consumes("application/json")
+    public Response putBiblio(List<Biblio> data) {
+        GenericDao<Biblio> genericDao = allDao.getBiblioDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/ConstSel")
+    @Consumes("application/json")
+    public Response putConstSel(List<ConstSel> data) {
+        GenericDao<ConstSel> genericDao = allDao.getConstSelDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/CuryTabl")
+    @Consumes("application/json")
+    public Response putCuryTabl(List<CuryTabl> data) {
+        GenericDao<CuryTabl> genericDao = allDao.getCuryTablDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/DecrTabl")
+    @Consumes("application/json")
+    public Response putDecrTabl(List<DecrTabl> data) {
+        GenericDao<DecrTabl> genericDao = allDao.getDecrTablDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/Density")
+    @Consumes("application/json")
+    public Response putDensity(List<Density> data) {
+        GenericDao<Density> genericDao = allDao.getDensityDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/DielDiss")
+    @Consumes("application/json")
+    public Response putDielDiss(List<DielDiss> data) {
+        GenericDao<DielDiss> genericDao = allDao.getDielDissDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/Dielectr")
+    @Consumes("application/json")
+    public Response putDielectr(List<Dielectr> data) {
+        GenericDao<Dielectr> genericDao = allDao.getDielectrDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/Elastic1")
+    @Consumes("application/json")
+    public Response putElastic1(List<Elastic1> data) {
+        GenericDao<Elastic1> genericDao = allDao.getElastic1Dao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/Element")
+    @Consumes("application/json")
+    public Response putElement(List<Element> data) {
+        GenericDao<Element> genericDao = allDao.getElementDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/ElemTabl")
+    @Consumes("application/json")
+    public Response putElemTabl(List<ElemTabl> data) {
+        GenericDao<ElemTabl> genericDao = allDao.getElemTablDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/ElOpTabl")
+    @Consumes("application/json")
+    public Response putElOpTabl(List<ElOpTabl> data) {
+        GenericDao<ElOpTabl> genericDao = allDao.getElOpTablDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/EsOpTabl")
+    @Consumes("application/json")
+    public Response putEsOpTabl(List<EsOpTabl> data) {
+        GenericDao<EsOpTabl> genericDao = allDao.getEsOpTablDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/HardTabl")
+    @Consumes("application/json")
+    public Response putHardTabl(List<HardTabl> data) {
+        GenericDao<HardTabl> genericDao = allDao.getHardTablDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/Heat")
+    @Consumes("application/json")
+    public Response putHeat(List<Heat> data) {
+        GenericDao<Heat> genericDao = allDao.getHeatDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/HeatExpn")
+    @Consumes("application/json")
+    public Response putHeatExpn(List<HeatExpn> data) {
+        GenericDao<HeatExpn> genericDao = allDao.getHeatExpnDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/MechTabl")
+    @Consumes("application/json")
+    public Response putMechTabl(List<MechTabl> data) {
+        GenericDao<MechTabl> genericDao = allDao.getMechTablDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/MNOpTabl")
+    @Consumes("application/json")
+    public Response putMNOpTabl(List<MNOpTabl> data) {
+        GenericDao<MNOpTabl> genericDao = allDao.getMNOpTablDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/NlOpTabl")
+    @Consumes("application/json")
+    public Response putNlOpTabl(List<NlOpTabl> data) {
+        GenericDao<NlOpTabl> genericDao = allDao.getNlOpTablDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/PlavTabl")
+    @Consumes("application/json")
+    public Response putPlavTabl(List<PlavTabl> data) {
+        GenericDao<PlavTabl> genericDao = allDao.getPlavTablDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/PzEl")
+    @Consumes("application/json")
+    public Response putPzEl(List<PzEl> data) {
+        GenericDao<PzEl> genericDao = allDao.getPzElDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/RefrcInd")
+    @Consumes("application/json")
+    public Response putRefrcInd(List<RefrcInd> data) {
+        GenericDao<RefrcInd> genericDao = allDao.getRefrcIndDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/Sist")
+    @Consumes("application/json")
+    public Response putSist(List<Sist> data) {
+        GenericDao<Sist> genericDao = allDao.getSistDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/SuspTabl")
+    @Consumes("application/json")
+    public Response putSuspTabl(List<SuspTabl> data) {
+        GenericDao<SuspTabl> genericDao = allDao.getSuspDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
+    }
+
+    @POST
+    @Path("/Wavepure")
+    @Consumes("application/json")
+    public Response putWavepure(List<Wavepure> data) {
+        GenericDao<Wavepure> genericDao = allDao.getWavepureDao();
+
+        if (genericDao != null) {
+            data.forEach(genericDao::update);
+            return Response.ok().build();
+        }
+        return Response.serverError().build();
     }
 }

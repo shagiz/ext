@@ -15,5 +15,7 @@ public interface GenericDao<E> {
 
     List<E> findAll(int page, int start, int limit, Sort sort, Integer headClue);
 
+    Long count(Integer headClue);
+
     E update(E t);
 }

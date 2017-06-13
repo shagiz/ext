@@ -86,6 +86,24 @@ public abstract class GenericDaoImpl<E> implements GenericDao<E> {
     }
 
     @Override
+    public Long count(Integer headClue) {
+        final StringBuffer queryString = new StringBuffer(
+                "SELECT count(o) from ");
+
+        queryString.append(type.getSimpleName()).append(" o ");
+
+        if (headClue != null) {
+            queryString
+                    .append("WHERE o.headClue=")
+                    .append(headClue)
+                    .append(" ");
+        }
+
+        final Query query = this.em.createQuery(queryString.toString());
+        return (Long) query.getSingleResult();
+    }
+
+    @Override
     public E update(E e) {
         em.getTransaction().begin();
         E res = this.em.merge(e);
