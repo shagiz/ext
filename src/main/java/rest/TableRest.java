@@ -114,14 +114,14 @@ public class TableRest {
                 return allDao.getBiblioDao();
             case "PzEl":
                 return allDao.getPzElDao();
-            case "Hard":
+            case "HardTabl":
                 return allDao.getHardTablDao();
             case "SuspTabl":
                 return allDao.getSuspDao();
             case "PlavTabl":
                 return allDao.getPlavTablDao();
             case "CuryTabl":
-                return allDao.getCuryTablDao();
+                return allDao.getPlavTablDao();
             case "ElemTabl":
                 return allDao.getElemTablDao();
             case "HeatExpn":

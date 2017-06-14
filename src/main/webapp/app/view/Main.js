@@ -266,9 +266,11 @@ Ext.define('MVC.view.Main', {
                 }
             });
             newStore.on('load', function (st) {
-                contentPanel.setTitle('Таблица - ' + entity);
-                contentPanel.reconfigure(newStore, col);
-                toolbar.bindStore(newStore);
+                if (toolbar.store !== st) {
+                    contentPanel.setTitle('Таблица - ' + entity);
+                    contentPanel.reconfigure(newStore, col);
+                    toolbar.bindStore(newStore);
+                }
             });
 
             return newStore;
@@ -302,17 +304,14 @@ Ext.define('MVC.view.Main', {
                     handler: function () {
                         rowEditing.cancelEdit();
 
-                        var prev = store.data.items[0].data;
                         var newRow = {};
-                        for (var property  in prev) {
-                            if (prev.hasOwnProperty(property)) {
-                                if (property === "headClue") {
-                                    newRow[property] = element;
-                                } else {
-                                    newRow[property] = null;
-                                }
+                        col.forEach(function (c) {
+                            if (c.dataIndex === 'headClue') {
+                                newRow[c.dataIndex] = element;
+                            } else {
+                                newRow[c.dataIndex] = null;
                             }
-                        }
+                        });
 
                         store.insert(0, newRow);
                         rowEditing.startEdit(0, 0);
@@ -445,6 +444,7 @@ Ext.define('MVC.view.Main', {
 
                                     var singStore = Ext.create('Ext.data.Store', {
                                         fields: ['singClue', 'singType'],
+                                        autoLoad: true,
                                         proxy: {
                                             type: 'ajax',
                                             method: 'get',
@@ -452,7 +452,7 @@ Ext.define('MVC.view.Main', {
                                         }
                                     });
 
-                                    item.editor =  Ext.create('Ext.form.ComboBox', {
+                                    item.editor = Ext.create('Ext.form.ComboBox', {
                                         store: singStore,
                                         queryMode: 'local',
                                         forceSelection: true,
@@ -466,7 +466,7 @@ Ext.define('MVC.view.Main', {
                                     item.editor = {
                                         allowBlank: item.allowBlank,
                                         xtype: item.fieldType,
-                                        maxLength: item.fieldLength === 0 ? 100 : item.fieldLength
+                                        maxLength: item.fieldLength === 0 ? 2000 : item.fieldLength
                                     }
                                 }
                             }
