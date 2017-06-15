@@ -19,22 +19,6 @@ Ext.define('MVC.view.RadioDialog', {
             }
         });
 
-        var editButton = Ext.create('Ext.button.Button', {
-            text: 'Редактирование',
-            width: 150,
-            height: 35,
-            margin: '10 10 10 10',
-            handler: function () {
-                radioWindow.destroy();
-
-                if (radioValue == 0) {
-                    Ext.create('MVC.view.Main').show();
-                } else {
-                    Ext.create('MVC.view.Main').showBibliography('edit');
-                }
-            }
-        });
-
         var exitButton = Ext.create('Ext.button.Button', {
             text: 'Выход',
             width: 150,
@@ -82,7 +66,6 @@ Ext.define('MVC.view.RadioDialog', {
                     layout: 'vbox',
                     items: [
                         insertButton,
-                        editButton,
                         exitButton
                     ]
                 }

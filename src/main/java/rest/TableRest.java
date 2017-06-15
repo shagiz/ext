@@ -100,6 +100,18 @@ public class TableRest {
         return Response.noContent().build();
     }
 
+    @GET
+    @Path("/delete")
+    public Response deleteData(@QueryParam("entity") String entity,
+                               @QueryParam("id") Integer id) {
+        GenericDao genericDao = getDao(entity);
+        if (genericDao != null) {
+            genericDao.delete(id);
+            return Response.ok().build();
+        }
+        return Response.noContent().build();
+    }
+
     private GenericDao getDao(String entity) {
         switch (entity) {
             case "Acop":

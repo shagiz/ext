@@ -49,26 +49,18 @@ Ext.define('MVC.controller.LoginController', {
     },
 
     onLoginFailure: function (err) {
-        //Alert the user about communication error
-        Ext.MessageBox.alert('Error occured during Login', 'Please try again!');
+        Ext.MessageBox.alert('Ошибка авторизации', 'Please try again!');
     },
 
     onLoginSuccess: function (response, opts) {
-        //Received response from the server
         response = Ext.decode(response.responseText);
         if (response.success) {
-            // Ext.MessageBox.alert('Successful Login', response.message);
 
             localStorage.isLogged = true;
-
-            // Загружаем данные из бд в хранилище
-            // var store = Ext.create('MVC.store.TestStore');
-            // store.load();
 
             this.getView().destroy();
 
             Ext.create('MVC.view.RadioDialog').show();
-            // Ext.create('MVC.view.Main').show();
         } else {
             Ext.MessageBox.alert('Login failed', response.message);
         }

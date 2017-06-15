@@ -21,13 +21,13 @@ Ext.define('MVC.Application', {
 
         // Ext.create('MVC.view.RadioDialog').show();
 
-        // if (!localStorage.isLogged) {
+        if (localStorage.isLogged === 'false') {
             Ext.create('MVC.view.Login', {
                 renderTo: document.body
             });
-        // }else {
-        //     Ext.create('MVC.view.RadioDialog').show();
-            // Ext.create('MVC.view.Main').show();
-        // }
+        }else {
+            // Ext.create('MVC.view.RadioDialog').show();
+            Ext.create('MVC.view.Main').show();
+        }
     }
 });

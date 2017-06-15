@@ -23,7 +23,7 @@ Ext.define('MVC.view.Main', {
                     api: {
                         create: 'rest/table/elements',
                         update: 'rest/table/elements',
-                        destroy: 'rest/table/elements/delete'
+                        destroy: 'rest/table//elements/delete'
                     },
                     actionMethods: {
                         create: 'POST',
@@ -154,6 +154,9 @@ Ext.define('MVC.view.Main', {
                         handler: function () {
                             var sm = gridElements.getSelectionModel();
                             rowEditing.cancelEdit();
+                            store.getProxy().extraParams = {
+                                id: sm.getSelection()[0].data.id
+                            };
                             elementsStore.remove(sm.getSelection());
                             if (elementsStore.getCount() > 0) {
                                 sm.select(0);
@@ -181,6 +184,7 @@ Ext.define('MVC.view.Main', {
                     {
                         text: 'Выход',
                         handler: function () {
+                            localStorage.isLogged = false;
                             elementWin.destroy();
                             viewport.destroy();
                             Ext.create('MVC.view.Login', {
@@ -246,7 +250,7 @@ Ext.define('MVC.view.Main', {
                     api: {
                         create: 'rest/table/' + entity,
                         update: 'rest/table/' + entity,
-                        destroy: 'rest/table?entity=' + entity
+                        destroy: 'rest/table/delete?entity=' + entity
                     },
                     actionMethods: {
                         create: 'POST',
@@ -334,6 +338,9 @@ Ext.define('MVC.view.Main', {
                     handler: function () {
                         var sm = contentPanel.getSelectionModel();
                         rowEditing.cancelEdit();
+                        store.getProxy().extraParams = {
+                            id: sm.getSelection()[0].data.id
+                        };
                         store.remove(sm.getSelection());
                         if (store.getCount() > 0) {
                             sm.select(0);
@@ -345,6 +352,7 @@ Ext.define('MVC.view.Main', {
                     text: 'Выход',
                     handler: function () {
                         viewport.destroy();
+                        localStorage.isLogged = false;
                         Ext.create('MVC.view.Login', {
                             renderTo: document.body
                         });
@@ -568,7 +576,7 @@ Ext.define('MVC.view.Main', {
                 api: {
                     create: 'rest/table/' + entity,
                     update: 'rest/table/' + entity,
-                    destroy: 'rest/table?entity=' + entity
+                    destroy: 'rest/table/delete?entity=' + entity
                 },
                 actionMethods: {
                     create: 'POST',
@@ -647,6 +655,9 @@ Ext.define('MVC.view.Main', {
                     handler: function () {
                         var sm = contentPanel.getSelectionModel();
                         rowEditing.cancelEdit();
+                        store.getProxy().extraParams = {
+                            id: sm.getSelection()[0].data.id
+                        };
                         store.remove(sm.getSelection());
                         if (store.getCount() > 0) {
                             sm.select(0);
