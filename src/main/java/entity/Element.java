@@ -2,16 +2,13 @@ package entity;
 
 import javax.persistence.*;
 
-/**
- * Created by shagi on 04.04.2017.
- */
 @Entity
 @Table(name = "HeadTabl")
 public class Element {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "HeadClue", nullable = false)
+    @Column(name = "HeadClue", nullable = false, unique = true)
     private int headClue;
 
     @Column(name = "System")

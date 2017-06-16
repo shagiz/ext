@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
 
-    <persistence-unit name="MyPersist" transaction-type="JTA">
+    <persistence-unit name="MyPersist">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <jta-data-source>jdbc/Crystal</jta-data-source>
+        <non-jta-data-source>jdbc/Crystal</non-jta-data-source>
 
         <class>entity.User</class>
         <properties>

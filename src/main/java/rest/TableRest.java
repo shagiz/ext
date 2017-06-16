@@ -353,7 +353,10 @@ public class TableRest {
         GenericDao<Element> genericDao = allDao.getElementDao();
 
         if (genericDao != null) {
-            data.forEach(genericDao::update);
+            data.forEach(element -> {
+                element.setReferat(null);
+                genericDao.update(element);
+            });
             return Response.ok().build();
         }
         return Response.serverError().build();

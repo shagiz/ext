@@ -20,10 +20,11 @@ Ext.define('MVC.view.Main', {
                     type: 'ajax',
                     method: 'get',
                     url: 'rest/table/elements',
+                    batchActions: true,
                     api: {
-                        create: 'rest/table/elements',
-                        update: 'rest/table/elements',
-                        destroy: 'rest/table//elements/delete'
+                        create: 'rest/table/Element',
+                        update: 'rest/table/Element',
+                        destroy: 'rest/table/elements/delete'
                     },
                     actionMethods: {
                         create: 'POST',
@@ -39,8 +40,7 @@ Ext.define('MVC.view.Main', {
                     writer: {
                         allowSingle: false,
                         writeAllFields: true
-                    },
-                    paramsAsJson: true
+                    }
                 },
                 remoteFilter: true,
                 remoteSort: true
@@ -63,7 +63,8 @@ Ext.define('MVC.view.Main', {
                     width: 200,
                     text: "Формула соединения",
                     editor: {
-                        allowBlank: true
+                        allowBlank: true,
+                        maxLength: 128
                     },
                     filter: {
                         type: 'string',
@@ -77,7 +78,8 @@ Ext.define('MVC.view.Main', {
                     width: 180,
                     text: "Обозначение соединения",
                     editor: {
-                        allowBlank: true
+                        allowBlank: true,
+                        maxLength: 32
                     },
                     filter: {
                         type: 'string',
@@ -91,6 +93,7 @@ Ext.define('MVC.view.Main', {
                     width: 200,
                     text: "Эксперты",
                     editor: {
+                        maxLength: 32,
                         allowBlank: true
                     }
                 },
@@ -99,13 +102,14 @@ Ext.define('MVC.view.Main', {
                     width: 70,
                     text: "Класс",
                     editor: {
+                        xtype: 'numberfield',
                         allowBlank: true
                     }
                 },
                 {
                     //todo : показывать ?
                     // dataIndex: "referat",
-                    width: '100%',
+                    width: '15%',
                     text: "Аналитический обзор",
                     editor: {
                         allowBlank: true
@@ -129,7 +133,11 @@ Ext.define('MVC.view.Main', {
                             var newRow = {};
                             for (var property  in prev) {
                                 if (prev.hasOwnProperty(property)) {
-                                    newRow[property] = null;
+                                    if (property === 'headClue') {
+                                        newRow[property] = 0;
+                                    } else {
+                                        newRow[property] = null;
+                                    }
                                 }
                             }
 
@@ -146,7 +154,7 @@ Ext.define('MVC.view.Main', {
                     {
                         text: 'Сохранить изменения',
                         handler: function () {
-                            // elementsStore.sync();
+                            elementsStore.sync();
                         }
                     },
                     {
@@ -383,7 +391,7 @@ Ext.define('MVC.view.Main', {
                     {text: "Растворимость", leaf: true, entity: 'SuspTabl'},
                     {text: "Температура плавления", leaf: true, entity: 'PlavTabl'},
                     {text: "Температура Кюри", leaf: true, entity: 'CuryTabl'},
-                    {text: "Данные по полиморфным модификациям", leaf: true, entity: ''},
+                    // {text: "Данные по полиморфным модификациям", leaf: true, entity: ''},
                     {text: "Параметры элементарной ячейки", leaf: true, entity: 'ElemTabl'},
                     {text: "Тепловое расширение", leaf: true, entity: 'HeatExpn'},
                     {text: "Теплопроводность", leaf: true, entity: 'HeatExpn'},
@@ -399,7 +407,7 @@ Ext.define('MVC.view.Main', {
                     {text: "Компоненты тензора Миллера", leaf: true, entity: 'MNOpTabl'},
                     {text: "Упруго(пьезо)оптические коэффициенты", leaf: true, entity: 'EsOpTabl'},
                     {text: "Коэффициенты затухания упругих волн", leaf: true, entity: 'DecrTabl'},
-                    {text: "Подписи к рисункам", leaf: true, entity: ''}
+                    // {text: "Подписи к рисункам", leaf: true, entity: ''}
                 ]
             }
         });
