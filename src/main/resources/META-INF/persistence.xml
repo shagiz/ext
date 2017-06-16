@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
 
-    <persistence-unit name="MyPersist">
+    <persistence-unit name="MyPersist" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>entity.User</class>
+        <jta-data-source>jdbc/Crystal</jta-data-source>
 
+        <class>entity.User</class>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:sqlserver://localhost:49389;databaseName=Crystal"/>
-            <property name="hibernate.connection.driver_class" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServer2012Dialect"/>
-            <property name="hibernate.connection.username" value="shagi"/>
-            <property name="hibernate.connection.password" value="root"/>
+            <!--<property name="hibernate.connection.url" value="jdbc:sqlserver://localhost:49389;databaseName=Crystal"/>-->
+            <!--<property name="hibernate.connection.driver_class" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>-->
+            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServer2012Dialect"/>-->
+            <!--<property name="hibernate.connection.username" value="shagi"/>-->
+            <!--<property name="hibernate.connection.password" value="root"/>-->
+            <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>
             <property name="hibernate.archive.autodetection" value="class"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
